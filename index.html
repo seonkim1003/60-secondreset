@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 60-Second Reset 🌿 | Bridging the Gap</title>
+<style>
+  :root{
+    --bg:#f3f8ff;
+    --ink:#243b53;
+    --ink-soft:#52606d;
+    --pause:#5b8def;   /* blue */
+    --reset:#34c79a;   /* green */
+    --choose:#ff9f43;  /* orange */
+    --pink:#ff6b9d;
+    --purple:#9b6bff;
+    --yellow:#ffd166;
+    --card:#ffffff;
+    --shadow:0 10px 30px rgba(36,59,83,.12);
+    --shadow-sm:0 4px 14px rgba(36,59,83,.10);
+    --radius:26px;
+    --font:'Trebuchet MS','Comic Sans MS','Segoe UI',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);
+    background:
+      radial-gradient(1200px 600px at 10% -5%, #e8f2ff 0%, transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, #eafff6 0%, transparent 55%),
+      var(--bg);
+    line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{line-height:1.15;margin:0 0 .4em}
+  p{margin:0 0 1em}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  section{padding:64px 0;position:relative;scroll-margin-top:80px}
+  .eyebrow{display:inline-block;font-weight:bold;letter-spacing:.06em;text-transform:uppercase;
+    font-size:.8rem;padding:6px 14px;border-radius:999px;background:#fff;box-shadow:var(--shadow-sm);margin-bottom:14px}
+
+  /* ---------- Nav ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);
+    backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(36,59,83,.08)}
+  nav .wrap{display:flex;align-items:center;gap:10px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+  nav .logo{font-weight:bold;font-size:1.1rem;margin-right:auto;display:flex;align-items:center;gap:8px}
+  nav a{color:var(--ink-soft);text-decoration:none;font-weight:bold;font-size:.92rem;
+    padding:8px 12px;border-radius:999px;transition:.15s;cursor:pointer}
+  nav a:hover{background:#eef4ff;color:var(--ink)}
+  nav a:focus-visible{outline:3px solid var(--purple);outline-offset:2px;background:#eef4ff;color:var(--ink)}
+
+  /* ---------- Buttons ---------- */
+  .btn{font-family:inherit;font-size:1.15rem;font-weight:bold;cursor:pointer;border:none;
+    padding:16px 30px;border-radius:999px;color:#fff;background:var(--purple);
+    box-shadow:var(--shadow);transition:transform .12s, box-shadow .12s;min-height:56px}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:translateY(1px)}
+  .btn:focus-visible{outline:4px solid #ffd166;outline-offset:3px}
+  .btn.green{background:var(--reset)} .btn.blue{background:var(--pause)}
+  .btn.orange{background:var(--choose)} .btn.pink{background:var(--pink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm)}
+  .btn.small{font-size:1rem;padding:12px 22px;min-height:48px}
+
+  /* ---------- Hero ---------- */
+  .hero{text-align:center;padding-top:48px}
+  .hero h1{font-size:clamp(2.2rem,6vw,4rem);color:var(--ink)}
+  .hero h1 .grad{background:linear-gradient(90deg,var(--pause),var(--reset),var(--choose));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .lead{font-size:clamp(1.1rem,2.6vw,1.5rem);color:var(--ink-soft);max-width:620px;margin:0 auto 28px}
+  .mascot{width:170px;height:170px;margin:6px auto 8px;display:block}
+  .float{animation:float 4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+
+  /* ---------- Mood check-in ---------- */
+  .mood{margin-top:40px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:26px;max-width:620px;margin-inline:auto}
+  .mood h3{font-size:1.3rem}
+  .mood-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+  .mood-btn{font-size:2.2rem;background:#f3f8ff;border:3px solid transparent;border-radius:20px;
+    width:68px;height:68px;cursor:pointer;transition:.15s;line-height:1}
+  .mood-btn:hover{transform:scale(1.12)}
+  .mood-btn[aria-pressed="true"]{border-color:var(--purple);background:#f0eaff}
+  .mood-reply{min-height:1.6em;font-weight:bold;color:var(--ink);font-size:1.05rem}
+
+  /* ---------- Section cards ---------- */
+  .panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:34px}
+  .center{text-align:center}
+
+  /* ---------- Bottle (elephant toothpaste) ---------- */
+  .bottle-layout{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+  .worry-buttons{display:flex;flex-wrap:wrap;gap:10px}
+  .worry-buttons .btn.small{background:#eef4ff;color:var(--ink);box-shadow:var(--shadow-sm);position:relative}
+  .worry-buttons .btn.small:hover{background:#e0ecff}
+  .worry-buttons .btn.small.added{background:var(--pink);color:#fff}
+  .worry-buttons .btn.small.added::after{content:"✓ added";margin-left:8px;font-size:.85em;opacity:.9}
+  .worry-buttons .btn.small.pulse{animation:worryPulse .35s ease}
+  @keyframes worryPulse{0%{transform:scale(1)}45%{transform:scale(1.14)}100%{transform:scale(1)}}
+  .bottle-stage{display:flex;flex-direction:column;align-items:center}
+  .bottle-svg{width:200px;max-width:60vw}
+  #fillRect{transition:y .5s ease, height .5s ease, fill .5s ease}
+  .foam{opacity:0}
+  .erupting .foam{opacity:1;animation:erupt 1.1s ease-out forwards}
+  @keyframes erupt{0%{transform:translateY(20px) scale(.6);opacity:0}
+    40%{opacity:1}100%{transform:translateY(-40px) scale(1.25);opacity:.95}}
+  .erupting .bottle-svg{animation:shake .4s ease-in-out 3}
+  @keyframes shake{0%,100%{transform:translate(0)}25%{transform:translate(-4px,1px)}75%{transform:translate(4px,-1px)}}
+  .bottle-msg{margin-top:14px;font-weight:bold;min-height:2.6em;text-align:center;font-size:1.05rem}
+
+  /* ---------- Reset tool ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 30px}
+  .step{border-radius:22px;padding:20px;color:#fff;box-shadow:var(--shadow-sm);transition:.25s}
+  .step .num{font-size:1.7rem;font-weight:bold}
+  .step.pause{background:var(--pause)} .step.reset{background:var(--reset)} .step.choose{background:var(--choose)}
+  .step h3{font-size:1.25rem;margin:.2em 0}
+  .step p{font-size:.95rem;margin:0;opacity:.95}
+  .step.dim{opacity:.45;transform:scale(.97)}
+  .step.active{transform:scale(1.04);box-shadow:0 14px 30px rgba(36,59,83,.25)}
+
+  .reset-stage{display:flex;flex-direction:column;align-items:center;text-align:center}
+  .ring-wrap{position:relative;width:260px;height:260px;max-width:80vw;max-height:80vw}
+  .ring-wrap svg{transform:rotate(-90deg);width:100%;height:100%}
+  #ringFg{transition:stroke-dashoffset .25s linear, stroke .4s}
+  .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+  .breath{width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.25);
+    display:flex;align-items:center;justify-content:center;font-weight:bold;color:#fff;
+    position:absolute;font-size:1rem}
+  .breathing .breath{animation:breathe 8s ease-in-out infinite}
+  @keyframes breathe{0%,100%{transform:scale(.7)}50%{transform:scale(1.18)}}
+  .phase-name{font-size:1.5rem;font-weight:bold;color:#fff}
+  .phase-count{font-size:2.6rem;font-weight:bold;color:#fff;line-height:1}
+  .reset-prompt{font-size:1.2rem;font-weight:bold;min-height:2.4em;max-width:480px;margin:18px auto 6px}
+  .reset-controls{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .toggle{display:inline-flex;align-items:center;gap:8px;font-weight:bold;color:var(--ink-soft);cursor:pointer;margin-top:14px}
+  .toggle input{width:20px;height:20px;accent-color:var(--purple)}
+
+  .finish{text-align:center}
+  .finish .big{font-size:2rem;margin:.2em 0}
+  .confetti-pop{animation:pop .6s ease}
+  @keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+
+  /* ---------- Scenarios ---------- */
+  .scn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .scn-card{background:var(--card);border-radius:22px;box-shadow:var(--shadow-sm);padding:22px;
+    cursor:pointer;border:3px solid transparent;transition:.15s;text-align:left;font:inherit;width:100%}
+  .scn-card:hover{transform:translateY(-4px);border-color:var(--purple)}
+  .scn-card .emoji{font-size:2.2rem}
+  .scn-card h3{font-size:1.1rem;margin:.3em 0 0}
+  .scn-modal{position:fixed;inset:0;background:rgba(36,59,83,.55);display:none;
+    align-items:center;justify-content:center;z-index:100;padding:18px}
+  .scn-modal.open{display:flex}
+  .scn-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);max-width:560px;width:100%;
+    padding:30px;position:relative;max-height:90vh;overflow:auto}
+  .scn-box .close{position:absolute;top:14px;right:14px;border:none;background:#f3f8ff;width:42px;height:42px;
+    border-radius:50%;font-size:1.3rem;cursor:pointer;font-weight:bold;color:var(--ink)}
+  .scn-step-badge{display:inline-block;font-weight:bold;padding:6px 14px;border-radius:999px;color:#fff;margin-bottom:10px}
+  .scn-choices{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  .scn-choices .btn{font-size:1rem;text-align:left;background:#eef4ff;color:var(--ink);box-shadow:var(--shadow-sm)}
+  .scn-choices .btn:hover{background:#e0ecff}
+  .scn-feedback{margin-top:14px;font-weight:bold;min-height:1.4em;color:var(--reset)}
+  .scn-progress{font-size:.85rem;color:var(--ink-soft);font-weight:bold;margin-bottom:6px}
+
+  /* ---------- Help / why ---------- */
+  .help{background:linear-gradient(135deg,#fff5f9,#eef6ff);border-radius:var(--radius);box-shadow:var(--shadow);padding:34px}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .fact{background:#fff;border-radius:20px;padding:18px;box-shadow:var(--shadow-sm);text-align:center}
+  .fact .big{font-size:2rem}
+  .help-call{background:#fff;border-radius:20px;padding:20px;box-shadow:var(--shadow-sm);margin-top:20px;
+    display:flex;gap:14px;align-items:center;font-weight:bold;font-size:1.1rem}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink);color:#dfe7ef;text-align:center;padding:40px 20px}
+  footer .team{font-weight:bold;color:#fff;font-size:1.1rem;margin-bottom:6px}
+  footer .strength{color:var(--yellow);font-weight:bold;margin-top:10px}
+
+  /* ---------- Helpers ---------- */
+  .hidden{display:none!important}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:760px){
+    .bottle-layout{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .scn-grid{grid-template-columns:1fr}
+    .facts{grid-template-columns:1fr}
+    nav .logo{font-size:1rem}
+    nav a{padding:6px 9px;font-size:.85rem}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+    .breathing .breath{transform:scale(1)}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="wrap">
+    <span class="logo">🌿 The 60-Second Reset</span>
+    <a href="#stress">Stress</a>
+    <a href="#reset">The Reset</a>
+    <a href="#practice">Practice</a>
+    <a href="#help">Get Help</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap">
+    <svg class="mascot float" viewBox="0 0 120 120" role="img" aria-label="A friendly calm leaf character">
+      <circle cx="60" cy="62" r="46" fill="#34c79a"/>
+      <circle cx="60" cy="62" r="46" fill="none" stroke="#2bb189" stroke-width="3"/>
+      <path d="M60 20 C40 40 40 70 60 92 C80 70 80 40 60 20Z" fill="#bff3df"/>
+      <circle cx="48" cy="60" r="6" fill="#243b53"/>
+      <circle cx="72" cy="60" r="6" fill="#243b53"/>
+      <circle cx="50" cy="58" r="2" fill="#fff"/>
+      <circle cx="74" cy="58" r="2" fill="#fff"/>
+      <path d="M48 74 Q60 84 72 74" fill="none" stroke="#243b53" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="40" cy="70" r="5" fill="#ff9fbf" opacity=".7"/>
+      <circle cx="80" cy="70" r="5" fill="#ff9fbf" opacity=".7"/>
+    </svg>
+    <h1>The <span class="grad">60-Second Reset</span></h1>
+    <p class="lead">A tiny tool to help you feel calmer in under a minute — anywhere, anytime. 🌬️</p>
+    <div class="hero-btns">
+      <button class="btn green" onclick="document.getElementById('reset').scrollIntoView()">▶ Try the Reset</button>
+      <button class="btn ghost" onclick="document.getElementById('stress').scrollIntoView()">What is stress?</button>
+    </div>
+
+    <!-- Mood check-in -->
+    <div class="mood">
+      <h3>How do you feel today?</h3>
+      <p style="color:var(--ink-soft);margin-bottom:6px">Tap the face that fits. There's no wrong answer. 💛</p>
+      <div class="mood-row" id="moodRow">
+        <button class="mood-btn" aria-pressed="false" data-msg="Awesome! Let's keep that good energy going. 🌟">😀</button>
+        <button class="mood-btn" aria-pressed="false" data-msg="Nice — feeling okay is a great place to be. 🙂">🙂</button>
+        <button class="mood-btn" aria-pressed="false" data-msg="Feeling so-so is totally normal. The Reset can help. 💪">😐</button>
+        <button class="mood-btn" aria-pressed="false" data-msg="Thanks for being honest. Let's try a Reset together. 🌿">😟</button>
+        <button class="mood-btn" aria-pressed="false" data-msg="It's brave to share that. You're not alone — talking to a trusted adult helps. 💙">😢</button>
+      </div>
+      <p class="mood-reply" id="moodReply" aria-live="polite"></p>
+    </div>
+  </div>
+</header>
+
+<!-- ===== STRESS / ELEPHANT TOOTHPASTE ===== -->
+<section id="stress">
+  <div class="wrap">
+    <div class="panel">
+      <div class="center"><span class="eyebrow" style="color:var(--pink)">🐘 The Bottle Experiment</span></div>
+      <h2 class="center">What happens when we bottle up stress?</h2>
+      <p class="center" style="color:var(--ink-soft);max-width:640px;margin:0 auto 24px">
+        Stress is the worried, tense feeling we get from hard things. When we keep it all
+        inside, it builds up… and builds up. Tap the worries below and watch what happens!
+      </p>
+      <div class="bottle-layout">
+        <div>
+          <p style="font-weight:bold">Add some worries to the bottle:</p>
+          <div class="worry-buttons" id="worryButtons">
+            <button class="btn small">📚 Big test tomorrow</button>
+            <button class="btn small">😣 Friend trouble</button>
+            <button class="btn small">📉 Got a bad grade</button>
+            <button class="btn small">🏃 Running late</button>
+            <button class="btn small">😴 Didn't sleep well</button>
+          </div>
+          <p class="bottle-msg" id="bottleMsg" aria-live="polite">Tap a worry to add it in…</p>
+          <button class="btn green hidden" id="useResetBtn">🌿 Use the Reset to feel better</button>
+        </div>
+        <div class="bottle-stage" id="bottleStage">
+          <svg class="bottle-svg" viewBox="0 0 120 200" role="img" aria-label="A bottle filling up with stress">
+            <!-- foam erupting out the top -->
+            <g class="foam">
+              <circle cx="60" cy="30" r="10" fill="#ffd166"/>
+              <circle cx="46" cy="38" r="8" fill="#ff9f43"/>
+              <circle cx="74" cy="38" r="8" fill="#ff6b9d"/>
+              <circle cx="60" cy="46" r="7" fill="#9b6bff"/>
+              <circle cx="52" cy="26" r="6" fill="#5b8def"/>
+              <circle cx="70" cy="24" r="6" fill="#34c79a"/>
+            </g>
+            <!-- bottle neck -->
+            <rect x="50" y="40" width="20" height="22" rx="4" fill="#cfe0f5"/>
+            <!-- bottle body -->
+            <path d="M40 62 Q40 56 50 56 L70 56 Q80 56 80 62 L84 180 Q84 192 72 192 L48 192 Q36 192 36 180 Z"
+                  fill="#e8f0fb" stroke="#cfe0f5" stroke-width="2"/>
+            <!-- fill (clipped) -->
+            <clipPath id="bottleClip">
+              <path d="M40 62 Q40 56 50 56 L70 56 Q80 56 80 62 L84 180 Q84 192 72 192 L48 192 Q36 192 36 180 Z"/>
+            </clipPath>
+            <g clip-path="url(#bottleClip)">
+              <rect id="fillRect" x="34" y="190" width="52" height="2" fill="#5b8def"/>
+            </g>
+            <!-- label -->
+            <rect x="44" y="120" width="32" height="40" rx="6" fill="#fff" opacity=".75"/>
+            <text x="60" y="145" text-anchor="middle" font-size="22">😟</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE RESET ===== -->
+<section id="reset">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow" style="color:var(--purple)">⭐ The Main Tool</span></div>
+    <h2 class="center">The 60-Second Reset</h2>
+    <p class="center" style="color:var(--ink-soft);max-width:640px;margin:0 auto 10px">
+      Three easy steps you can do in under a minute. Let's try them together!
+    </p>
+
+    <div class="steps" id="stepCards">
+      <div class="step pause" data-step="0">
+        <div class="num">10s</div><h3>⏸️ Pause</h3>
+        <p>Stop and notice what you're feeling. Don't react right away.</p>
+      </div>
+      <div class="step reset" data-step="1">
+        <div class="num">20s</div><h3>🌬️ Reset</h3>
+        <p>Take slow breaths and tell yourself something kind to calm your body.</p>
+      </div>
+      <div class="step choose" data-step="2">
+        <div class="num">30s</div><h3>✅ Choose</h3>
+        <p>Now pick a calm, smart choice instead of acting in a rush.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <!-- live stage -->
+      <div class="reset-stage" id="resetStage">
+        <div class="ring-wrap" id="ringWrap">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="88" fill="none" stroke="#eef2f7" stroke-width="16"/>
+            <circle id="ringFg" cx="100" cy="100" r="88" fill="none" stroke="#9b6bff" stroke-width="16"
+                    stroke-linecap="round" stroke-dasharray="552.9" stroke-dashoffset="552.9"/>
+          </svg>
+          <div class="ring-center" id="ringCenter">
+            <div class="phase-name" id="phaseName" style="color:var(--ink)">Ready?</div>
+            <div class="phase-count" id="phaseCount" style="color:var(--ink-soft)">60</div>
+          </div>
+          <!-- breathing bubble lives only during reset phase -->
+          <div class="breath hidden" id="breathBubble">Breathe</div>
+        </div>
+
+        <p class="reset-prompt" id="resetPrompt" aria-live="polite">
+          Press <strong>Start</strong> and follow along. Find a comfy spot first. 🌿
+        </p>
+
+        <div class="reset-controls">
+          <button class="btn green" id="startBtn">▶ Start</button>
+          <button class="btn ghost hidden" id="pauseBtn">⏸ Pause</button>
+          <button class="btn ghost hidden" id="restartBtn">↻ Restart</button>
+        </div>
+
+        <label class="toggle">
+          <input type="checkbox" id="soundToggle"> 🔔 Gentle sound on
+        </label>
+      </div>
+
+      <!-- finish screen -->
+      <div class="finish hidden" id="finishScreen">
+        <div style="font-size:3.4rem" class="confetti-pop">🎉</div>
+        <h3 class="big">You did it!</h3>
+        <p style="color:var(--ink-soft);max-width:480px;margin:0 auto 18px">
+          That was your 60-Second Reset. You paused, you calmed your body, and you made
+          space for a smart choice. You can use this <strong>anytime</strong> you feel stressed.
+        </p>
+        <button class="btn purple" id="againBtn" style="background:var(--purple)">↻ Do it again</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRACTICE SCENARIOS ===== -->
+<section id="practice">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow" style="color:var(--choose)">🎯 Practice Time</span></div>
+    <h2 class="center">Try the Reset on real situations</h2>
+    <p class="center" style="color:var(--ink-soft);max-width:640px;margin:0 auto 24px">
+      Pick a situation and walk through Pause → Reset → Choose. There are no wrong answers —
+      it's about practicing the steps!
+    </p>
+    <div class="scn-grid" id="scnGrid"><!-- cards injected by JS --></div>
+  </div>
+</section>
+
+<!-- scenario modal -->
+<div class="scn-modal" id="scnModal" role="dialog" aria-modal="true" aria-labelledby="scnTitle">
+  <div class="scn-box">
+    <button class="close" id="scnClose" aria-label="Close">✕</button>
+    <p class="scn-progress" id="scnProgress"></p>
+    <span class="scn-step-badge" id="scnBadge">⏸️ Pause</span>
+    <h3 id="scnTitle">Scenario</h3>
+    <p id="scnText" style="color:var(--ink-soft)"></p>
+    <div class="scn-choices" id="scnChoices"></div>
+    <p class="scn-feedback" id="scnFeedback" aria-live="polite"></p>
+    <button class="btn green small hidden" id="scnNext" style="margin-top:14px">Next step →</button>
+  </div>
+</div>
+
+<!-- ===== HELP / WHY IT MATTERS ===== -->
+<section id="help">
+  <div class="wrap">
+    <div class="help">
+      <div class="center"><span class="eyebrow" style="color:var(--pause)">💙 Most Important</span></div>
+      <h2 class="center">It's okay to ask for help</h2>
+      <p class="center" style="color:var(--ink-soft);max-width:660px;margin:0 auto 22px">
+        Sometimes stress feels too big for a Reset — and that's okay. Feelings are invisible,
+        so people can't always tell when you're struggling. Talking about it really helps.
+      </p>
+      <div class="facts">
+        <div class="fact"><div class="big">🗣️</div><strong>Talking helps</strong>
+          <p style="margin:.4em 0 0;color:var(--ink-soft)">Sharing a worry makes it feel smaller.</p></div>
+        <div class="fact"><div class="big">🌱</div><strong>Care for feelings early</strong>
+          <p style="margin:.4em 0 0;color:var(--ink-soft)">Healthy habits now help you grow up strong.</p></div>
+        <div class="fact"><div class="big">💪</div><strong>Asking is brave</strong>
+          <p style="margin:.4em 0 0;color:var(--ink-soft)">Reaching out is a strength, not a weakness.</p></div>
+      </div>
+      <div class="help-call">
+        🤝 <span>If something feels too heavy, tell a <strong>trusted adult</strong> — a parent,
+        teacher, or school counselor. You don't have to handle it alone.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="team">Made by Bridging the Gap</div>
+  <div>Sofia · Samantha · Caden · Seonho</div>
+  <div class="strength">Remember: asking for help is a strength, not a weakness. 💛</div>
+</footer>
+
+<script>
+"use strict";
+/* ================= NAV (click + keyboard) ================= */
+(function(){
+  document.querySelectorAll('nav a').forEach(link=>{
+    function go(e){
+      const id=link.getAttribute('href');
+      const target=document.querySelector(id);
+      if(!target) return;
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+      history.replaceState(null,'',id);
+      // move keyboard focus into the section for screen-reader / tab users
+      target.setAttribute('tabindex','-1');
+      target.focus({preventScroll:true});
+    }
+    link.addEventListener('click',go);
+    // Enter/Space activate the link via keyboard
+    link.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') go(e); });
+  });
+})();
+
+/* ================= MOOD CHECK-IN ================= */
+(function(){
+  const row = document.getElementById('moodRow');
+  const reply = document.getElementById('moodReply');
+  row.querySelectorAll('.mood-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      row.querySelectorAll('.mood-btn').forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      reply.textContent = btn.dataset.msg;
+    });
+  });
+})();
+
+/* ================= GENTLE SOUND (WebAudio) ================= */
+const Sound = (function(){
+  let ctx=null, on=false;
+  function enabled(v){ on=v; if(on && !ctx){ try{ctx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){} } }
+  function beep(freq=520,dur=0.18){
+    if(!on||!ctx) return;
+    try{
+      const o=ctx.createOscillator(), g=ctx.createGain();
+      o.type='sine'; o.frequency.value=freq;
+      g.gain.setValueAtTime(0.0001,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.18,ctx.currentTime+0.03);
+      g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+dur);
+      o.connect(g).connect(ctx.destination);
+      o.start(); o.stop(ctx.currentTime+dur);
+    }catch(e){}
+  }
+  return {enabled,beep};
+})();
+document.getElementById('soundToggle').addEventListener('change',e=>{
+  Sound.enabled(e.target.checked);
+  if(e.target.checked) Sound.beep(660,0.15);
+});
+
+/* ================= ELEPHANT TOOTHPASTE BOTTLE ================= */
+(function(){
+  const stage=document.getElementById('bottleStage');
+  const fill=document.getElementById('fillRect');
+  const msg=document.getElementById('bottleMsg');
+  const useBtn=document.getElementById('useResetBtn');
+  const buttons=document.querySelectorAll('#worryButtons .btn');
+  const colors=['#5b8def','#34c79a','#ffd166','#ff9f43','#ff6b9d','#9b6bff'];
+  const top=56, bottom=190, maxLevel=5;
+  let level=0, erupted=false;
+
+  function render(){
+    const frac=Math.min(level,maxLevel)/maxLevel;
+    const h=(bottom-top)*frac;
+    fill.setAttribute('y', bottom-h);
+    fill.setAttribute('height', h);
+    fill.setAttribute('fill', colors[Math.min(level,colors.length-1)]);
+  }
+  function erupt(){
+    erupted=true;
+    stage.classList.add('erupting');
+    msg.innerHTML="💥 <strong>It overflowed!</strong> When we hold stress in, it builds up and overflows. Let's learn a safe way to let it out.";
+    useBtn.classList.remove('hidden');
+    Sound.beep(180,0.4);
+  }
+  buttons.forEach(btn=>btn.addEventListener('click',()=>{
+    if(erupted) return;
+    // show it was pressed: mark as added + quick pulse
+    btn.classList.add('added');
+    btn.classList.remove('pulse');
+    void btn.offsetWidth; // restart animation
+    btn.classList.add('pulse');
+    Sound.beep(360,0.1);
+    level++;
+    render();
+    if(level>=maxLevel){ erupt(); }
+    else { msg.textContent = "Feeling fuller… that worry is building up inside. (Keep going to see what happens.)"; }
+  }));
+  useBtn.addEventListener('click',()=>{
+    stage.classList.remove('erupting');
+    buttons.forEach(b=>b.classList.remove('added','pulse'));
+    level=0; erupted=false; render();
+    msg.innerHTML="😌 <strong>Ahh, better.</strong> Letting stress out safely keeps the bottle calm. Let's try the Reset!";
+    useBtn.classList.add('hidden');
+    document.getElementById('reset').scrollIntoView();
+  });
+  render();
+})();
+
+/* ================= THE 60-SECOND RESET TIMER ================= */
+(function(){
+  const PHASES=[
+    {name:'⏸️ Pause', key:'pause', secs:10, color:'#5b8def',
+     prompts:["Stop everything for a moment.","Notice what you're feeling right now.","You don't have to react yet — just notice."]},
+    {name:'🌬️ Reset', key:'reset', secs:20, color:'#34c79a',
+     prompts:["Breathe in slowly… and out…","Say to yourself: “I can handle this.”","“This feeling will pass.”","Let your shoulders drop. You're doing great."]},
+    {name:'✅ Choose', key:'choose', secs:30, color:'#ff9f43',
+     prompts:["Now your calm brain is back in charge.","What's a smart, kind choice you could make?","Pick the choice that future-you will be glad about."]},
+  ];
+  const TOTAL=PHASES.reduce((s,p)=>s+p.secs,0); // 60
+  const CIRC=2*Math.PI*88; // ~552.9
+
+  const ringFg=document.getElementById('ringFg');
+  const phaseName=document.getElementById('phaseName');
+  const phaseCount=document.getElementById('phaseCount');
+  const prompt=document.getElementById('resetPrompt');
+  const breath=document.getElementById('breathBubble');
+  const ringWrap=document.getElementById('ringWrap');
+  const stepCards=document.querySelectorAll('#stepCards .step');
+  const startBtn=document.getElementById('startBtn');
+  const pauseBtn=document.getElementById('pauseBtn');
+  const restartBtn=document.getElementById('restartBtn');
+  const stage=document.getElementById('resetStage');
+  const finish=document.getElementById('finishScreen');
+  const againBtn=document.getElementById('againBtn');
+
+  let timerId=null, running=false;
+  let phaseIdx=0, phaseRemaining=0, promptIdx=0, promptTick=0;
+
+  function highlight(idx){
+    stepCards.forEach(c=>{
+      const i=+c.dataset.step;
+      c.classList.toggle('active', i===idx);
+      c.classList.toggle('dim', idx>=0 && i!==idx);
+    });
+  }
+  function setRing(elapsedTotal, color){
+    const frac=elapsedTotal/TOTAL;
+    ringFg.style.strokeDashoffset = CIRC*(1-frac);
+    ringFg.style.stroke = color;
+  }
+  function elapsedBefore(idx){ let s=0; for(let i=0;i<idx;i++) s+=PHASES[i].secs; return s; }
+
+  function enterPhase(idx){
+    const ph=PHASES[idx];
+    phaseRemaining=ph.secs;
+    promptIdx=0; promptTick=0;
+    phaseName.textContent=ph.name;
+    phaseName.style.color=ph.color;
+    phaseCount.style.color=ph.color;
+    prompt.textContent=ph.prompts[0];
+    highlight(idx);
+    Sound.beep(ph.key==='pause'?440:ph.key==='reset'?523:587,0.2);
+    // breathing bubble only during reset
+    if(ph.key==='reset'){ breath.classList.remove('hidden'); ringWrap.classList.add('breathing'); }
+    else { breath.classList.add('hidden'); ringWrap.classList.remove('breathing'); }
+  }
+
+  function tick(){
+    phaseRemaining--;
+    promptTick++;
+    const ph=PHASES[phaseIdx];
+    phaseCount.textContent=Math.max(phaseRemaining,0);
+    const elapsedTotal=elapsedBefore(phaseIdx)+(ph.secs-phaseRemaining);
+    setRing(elapsedTotal, ph.color);
+    // rotate prompts every ~5s
+    if(promptTick%5===0){
+      promptIdx=(promptIdx+1)%ph.prompts.length;
+      prompt.textContent=ph.prompts[promptIdx];
+    }
+    if(phaseRemaining<=0){
+      phaseIdx++;
+      if(phaseIdx>=PHASES.length){ complete(); return; }
+      enterPhase(phaseIdx);
+    }
+  }
+
+  function start(){
+    if(running) return;
+    running=true;
+    startBtn.classList.add('hidden');
+    pauseBtn.classList.remove('hidden');
+    restartBtn.classList.remove('hidden');
+    pauseBtn.textContent='⏸ Pause';
+    if(phaseRemaining===0 && phaseIdx===0){ enterPhase(0); phaseCount.textContent=PHASES[0].secs; }
+    timerId=setInterval(tick,1000);
+  }
+  function pause(){
+    if(running){
+      running=false; clearInterval(timerId);
+      pauseBtn.textContent='▶ Resume';
+      ringWrap.classList.remove('breathing');
+    } else {
+      running=true;
+      pauseBtn.textContent='⏸ Pause';
+      if(PHASES[phaseIdx].key==='reset') ringWrap.classList.add('breathing');
+      timerId=setInterval(tick,1000);
+    }
+  }
+  function reset(){
+    clearInterval(timerId); running=false;
+    phaseIdx=0; phaseRemaining=0;
+    ringFg.style.strokeDashoffset=CIRC;
+    ringFg.style.stroke='#9b6bff';
+    phaseName.textContent='Ready?'; phaseName.style.color='var(--ink)';
+    phaseCount.textContent='60'; phaseCount.style.color='var(--ink-soft)';
+    prompt.innerHTML='Press <strong>Start</strong> and follow along. Find a comfy spot first. 🌿';
+    breath.classList.add('hidden'); ringWrap.classList.remove('breathing');
+    highlight(-1);
+    startBtn.classList.remove('hidden');
+    pauseBtn.classList.add('hidden');
+    restartBtn.classList.add('hidden');
+    finish.classList.add('hidden');
+    stage.classList.remove('hidden');
+  }
+  function complete(){
+    clearInterval(timerId); running=false;
+    setRing(TOTAL,'#34c79a');
+    ringWrap.classList.remove('breathing'); breath.classList.add('hidden');
+    highlight(-1);
+    Sound.beep(784,0.3);
+    setTimeout(()=>{ Sound.beep(988,0.3); },180);
+    stage.classList.add('hidden');
+    finish.classList.remove('hidden');
+  }
+
+  startBtn.addEventListener('click',start);
+  pauseBtn.addEventListener('click',pause);
+  restartBtn.addEventListener('click',reset);
+  againBtn.addEventListener('click',()=>{ reset(); start(); });
+})();
+
+/* ================= PRACTICE SCENARIOS ================= */
+(function(){
+  const scenarios=[
+    {emoji:'📉', title:'A tough grade',
+     text:"You studied really hard, but you got a bad grade on your test. You feel frustrated and want to give up.",
+     steps:[
+       {badge:'⏸️ Pause', color:'#5b8def', q:"First step: Pause. What's the calm thing to do right now?",
+        choices:[
+          {t:"Rip up the test and storm off",ok:false,fb:"That's a big reaction. Pausing first gives your calm brain a chance. Try again!"},
+          {t:"Stop and take a breath before reacting",ok:true,fb:"Yes! Pausing stops the rush feeling so you can think clearly."}
+        ]},
+       {badge:'🌬️ Reset', color:'#34c79a', q:"Now Reset. What's a kind thing to tell yourself?",
+        choices:[
+          {t:"“I'm just bad at this.”",ok:false,fb:"Be gentle with yourself. One grade doesn't decide who you are. Try a kinder thought!"},
+          {t:"“One test doesn't define me. I can improve.”",ok:true,fb:"Beautiful. Kind self-talk calms your body and your mind."}
+        ]},
+       {badge:'✅ Choose', color:'#ff9f43', q:"Finally, Choose. What's a smart next step?",
+        choices:[
+          {t:"Ask the teacher what I can do better next time",ok:true,fb:"Great choice! That turns a tough moment into a chance to grow. 🌱"},
+          {t:"Decide to never try again",ok:false,fb:"Your calm brain knows you can grow from this. Pick the choice future-you will thank you for!"}
+        ]},
+     ]},
+    {emoji:'😣', title:'Friend trouble',
+     text:"A friend said something at lunch that hurt your feelings. You feel angry and left out.",
+     steps:[
+       {badge:'⏸️ Pause', color:'#5b8def', q:"Step one: Pause. What helps most right now?",
+        choices:[
+          {t:"Yell back right away",ok:false,fb:"That can make things worse. Pausing first keeps you in control. Try again!"},
+          {t:"Take 10 seconds before saying anything",ok:true,fb:"Exactly. A short pause stops a hurt feeling from becoming a bigger fight."}
+        ]},
+       {badge:'🌬️ Reset', color:'#34c79a', q:"Now Reset your body. What helps you calm down?",
+        choices:[
+          {t:"Slow breaths and remind myself I'm okay",ok:true,fb:"Perfect. Calm body, calmer thoughts."},
+          {t:"Hold my breath and stay tense",ok:false,fb:"Slow breathing tells your body it's safe. Try the calmer option!"}
+        ]},
+       {badge:'✅ Choose', color:'#ff9f43', q:"Choose your next move:",
+        choices:[
+          {t:"Calmly tell my friend how it made me feel",ok:true,fb:"Wonderful. Honest, calm words fix more than anger ever could. 💛"},
+          {t:"Spread a rumor to get even",ok:false,fb:"Your calm brain wants a choice that helps, not hurts. Try again!"}
+        ]},
+     ]},
+    {emoji:'😰', title:'Test nerves',
+     text:"There's a big test in five minutes. Your heart is pounding and your mind feels blank.",
+     steps:[
+       {badge:'⏸️ Pause', color:'#5b8def', q:"Pause first. What's the move?",
+        choices:[
+          {t:"Notice the nervous feeling without panicking",ok:true,fb:"Yes! Naming the feeling takes away some of its power."},
+          {t:"Tell myself I'm going to fail",ok:false,fb:"Pausing means noticing — not piling on scary thoughts. Try again!"}
+        ]},
+       {badge:'🌬️ Reset', color:'#34c79a', q:"Reset time. Pick the best calming tool:",
+        choices:[
+          {t:"Three slow breaths and “I'm ready for this.”",ok:true,fb:"Great! Breathing slows your heart and clears your mind."},
+          {t:"Drink lots of soda fast",ok:false,fb:"That speeds you up more! Slow breaths are the calming choice. Try again!"}
+        ]},
+       {badge:'✅ Choose', color:'#ff9f43', q:"Now Choose how to start the test:",
+        choices:[
+          {t:"Read the first question and do my best",ok:true,fb:"That's it! One calm step at a time. You've got this. 🌟"},
+          {t:"Give up before I even start",ok:false,fb:"Your calm brain knows you can try. Pick the brave choice!"}
+        ]},
+     ]},
+  ];
+
+  const grid=document.getElementById('scnGrid');
+  const modal=document.getElementById('scnModal');
+  const badge=document.getElementById('scnBadge');
+  const titleEl=document.getElementById('scnTitle');
+  const textEl=document.getElementById('scnText');
+  const choicesEl=document.getElementById('scnChoices');
+  const feedback=document.getElementById('scnFeedback');
+  const nextBtn=document.getElementById('scnNext');
+  const progress=document.getElementById('scnProgress');
+  const closeBtn=document.getElementById('scnClose');
+
+  let current=null, stepIdx=0;
+
+  scenarios.forEach((s,i)=>{
+    const card=document.createElement('button');
+    card.className='scn-card';
+    card.innerHTML=`<div class="emoji">${s.emoji}</div><h3>${s.title}</h3>
+      <p style="margin:.3em 0 0;color:var(--ink-soft);font-size:.92rem">${s.text}</p>`;
+    card.addEventListener('click',()=>openScenario(i));
+    grid.appendChild(card);
+  });
+
+  function openScenario(i){
+    current=scenarios[i]; stepIdx=0;
+    modal.classList.add('open');
+    renderStep();
+  }
+  function renderStep(){
+    const step=current.steps[stepIdx];
+    progress.textContent=`Step ${stepIdx+1} of ${current.steps.length} — ${current.title}`;
+    badge.textContent=step.badge;
+    badge.style.background=step.color;
+    titleEl.textContent=step.q;
+    textEl.textContent=stepIdx===0?current.text:'';
+    feedback.textContent='';
+    nextBtn.classList.add('hidden');
+    choicesEl.innerHTML='';
+    step.choices.forEach(ch=>{
+      const b=document.createElement('button');
+      b.className='btn small'; b.textContent=ch.t;
+      b.addEventListener('click',()=>{
+        feedback.style.color=ch.ok?'var(--reset)':'var(--choose)';
+        feedback.textContent=ch.fb;
+        if(ch.ok){
+          Sound.beep(660,0.15);
+          [...choicesEl.children].forEach(c=>c.disabled=true);
+          if(stepIdx<current.steps.length-1){
+            nextBtn.textContent='Next step →';
+            nextBtn.classList.remove('hidden');
+          } else {
+            nextBtn.textContent='🎉 Finish';
+            nextBtn.classList.remove('hidden');
+          }
+        }
+      });
+      choicesEl.appendChild(b);
+    });
+  }
+  nextBtn.addEventListener('click',()=>{
+    if(stepIdx<current.steps.length-1){ stepIdx++; renderStep(); }
+    else {
+      badge.textContent='🌟 Great job!'; badge.style.background='var(--purple)';
+      progress.textContent=current.title+' — complete!';
+      titleEl.textContent="You walked through the whole Reset!";
+      textEl.textContent="Pause → Reset → Choose. You can use these same three steps with any tricky situation in real life.";
+      choicesEl.innerHTML=''; feedback.textContent=''; nextBtn.classList.add('hidden');
+      Sound.beep(784,0.3);
+    }
+  });
+
+  function close(){ modal.classList.remove('open'); current=null; }
+  closeBtn.addEventListener('click',close);
+  modal.addEventListener('click',e=>{ if(e.target===modal) close(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && modal.classList.contains('open')) close(); });
+})();
+</script>
+</body>
+</html>

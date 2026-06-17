@@ -1,0 +1,5 @@
+# Local preview helper (not part of the site)
+.claude/
+
+# OS files
+.DS_Store
