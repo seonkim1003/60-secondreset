@@ -109,9 +109,6 @@
   .worry-buttons .btn.small{background:#eef4ff;color:var(--ink);box-shadow:var(--shadow-sm);position:relative}
   .worry-buttons .btn.small:hover{background:#e0ecff}
   .worry-buttons .btn.small.added{background:var(--pink);color:#fff}
-  .worry-buttons .btn.small.added::after{content:"✓ added";margin-left:8px;font-size:.85em;opacity:.9}
-  .worry-buttons .btn.small.pulse{animation:worryPulse .35s ease}
-  @keyframes worryPulse{0%{transform:scale(1)}45%{transform:scale(1.14)}100%{transform:scale(1)}}
   .bottle-stage{display:flex;flex-direction:column;align-items:center}
   .bottle-svg{width:180px;max-width:55vw}
   #fillRect{transition:y .5s ease, height .5s ease, fill .5s ease}
@@ -538,7 +535,6 @@ const Deck = (function(){
   buttons.forEach(btn=>btn.addEventListener('click',()=>{
     if(erupted) return;
     btn.classList.add('added');
-    btn.classList.remove('pulse'); void btn.offsetWidth; btn.classList.add('pulse');
     Sound.beep(360,0.1);
     level++; render();
     if(level>=maxLevel){ erupt(); }
@@ -546,7 +542,7 @@ const Deck = (function(){
   }));
   useBtn.addEventListener('click',()=>{
     stage.classList.remove('erupting');
-    buttons.forEach(b=>b.classList.remove('added','pulse'));
+    buttons.forEach(b=>b.classList.remove('added'));
     level=0; erupted=false; render();
     useBtn.classList.add('hidden');
     msg.textContent="Tap a worry to add it in…";
