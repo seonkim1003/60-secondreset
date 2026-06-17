@@ -4,163 +4,177 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The 60-Second Reset | Bridging the Gap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f3f8ff;
-    --ink:#243b53;
-    --ink-soft:#52606d;
-    --pause:#5b8def;
-    --reset:#34c79a;
-    --choose:#ff9f43;
-    --pink:#ff6b9d;
-    --purple:#9b6bff;
-    --yellow:#ffd166;
-    --card:#ffffff;
-    --shadow:0 10px 30px rgba(36,59,83,.12);
-    --shadow-sm:0 4px 14px rgba(36,59,83,.10);
-    --radius:26px;
-    --font:'Trebuchet MS','Comic Sans MS','Segoe UI',system-ui,sans-serif;
-    --topbar:58px;
-    --botbar:88px;
+    /* solid palette, no gradients */
+    --bg:#eef2fa;
+    --surface:#ffffff;
+    --surface-2:#f6f8fc;
+    --ink:#1f2b3d;
+    --ink-soft:#5a6779;
+    --line:#e4e9f2;
+
+    --purple:#6c4bf0;
+    --pause:#3b6fe0;
+    --reset:#0e9b75;
+    --choose:#e8740e;
+    --pink:#ec5a8d;
+    --yellow:#ffc44d;
+
+    --sh-sm:0 2px 8px rgba(31,43,61,.08);
+    --sh:0 10px 26px rgba(31,43,61,.10);
+    --sh-lg:0 18px 44px rgba(31,43,61,.14);
+
+    --r-card:22px;
+    --r-badge:16px;
+
+    --font-head:'Baloo 2','Trebuchet MS',system-ui,sans-serif;
+    --font-body:'Nunito','Segoe UI',system-ui,sans-serif;
+
+    --topbar:60px;
+    --botbar:90px;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;font-family:var(--font);color:var(--ink);overflow:hidden;
-    background:
-      radial-gradient(1200px 600px at 10% -5%, #e8f2ff 0%, transparent 60%),
-      radial-gradient(1000px 500px at 100% 0%, #eafff6 0%, transparent 55%),
-      var(--bg);
-    -webkit-font-smoothing:antialiased;
+    margin:0;font-family:var(--font-body);color:var(--ink);overflow:hidden;
+    background:var(--bg);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3{line-height:1.15;margin:0 0 .4em}
+  h1,h2,h3{font-family:var(--font-head);line-height:1.12;margin:0 0 .4em;font-weight:700}
   p{margin:0 0 1em}
-  .eyebrow{display:inline-block;font-weight:bold;letter-spacing:.06em;text-transform:uppercase;
-    font-size:.8rem;padding:6px 16px;border-radius:999px;background:#fff;box-shadow:var(--shadow-sm);margin-bottom:14px}
+  strong{font-weight:800}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-head);font-weight:700;
+    letter-spacing:.04em;text-transform:uppercase;font-size:.78rem;padding:7px 16px;border-radius:999px;
+    background:#fff;box-shadow:var(--sh-sm);margin-bottom:16px}
+  .eyebrow .dot{width:9px;height:9px;border-radius:50%;background:currentColor}
 
   /* ---------- icons ---------- */
   .ic{width:1.15em;height:1.15em;display:inline-block;vertical-align:-0.18em;fill:none}
-  .btn .ic{width:1.25em;height:1.25em;margin-right:.35em}
+  .btn .ic{width:1.25em;height:1.25em;margin-right:.4em}
 
   /* ---------- Buttons ---------- */
-  .btn{font-family:inherit;font-size:1.15rem;font-weight:bold;cursor:pointer;border:none;
+  .btn{font-family:var(--font-head);font-size:1.1rem;font-weight:700;cursor:pointer;border:none;
     display:inline-flex;align-items:center;justify-content:center;
-    padding:16px 30px;border-radius:999px;color:#fff;background:var(--purple);
-    box-shadow:var(--shadow);transition:transform .12s, box-shadow .12s;min-height:56px}
-  .btn:hover{transform:translateY(-2px)}
-  .btn:active{transform:translateY(1px)}
-  .btn:focus-visible{outline:4px solid #ffd166;outline-offset:3px}
+    padding:15px 28px;border-radius:999px;color:#fff;background:var(--purple);
+    box-shadow:var(--sh);transition:transform .16s ease, box-shadow .16s ease, background .16s ease;min-height:54px}
+  .btn:hover{transform:translateY(-2px);box-shadow:var(--sh-lg)}
+  .btn:active{transform:translateY(0)}
+  .btn:focus-visible{outline:4px solid #ffd98a;outline-offset:3px}
   .btn.green{background:var(--reset)} .btn.blue{background:var(--pause)}
   .btn.orange{background:var(--choose)} .btn.pink{background:var(--pink)}
-  .btn.ghost{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm)}
-  .btn.small{font-size:1rem;padding:12px 22px;min-height:48px}
-  .btn[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:var(--sh-sm);border:2px solid var(--line)}
+  .btn.ghost:hover{border-color:#d3dbe9}
+  .btn.small{font-size:1rem;padding:12px 20px;min-height:48px}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
 
   /* ================= COURSE / DECK ================= */
   .topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar);z-index:40;
-    display:flex;align-items:center;gap:12px;padding:0 18px;
-    background:rgba(255,255,255,.85);backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(36,59,83,.08)}
-  .topbar .logo{font-weight:bold;display:flex;align-items:center;gap:9px;font-size:1rem}
-  .topbar .logo .ic{width:1.5em;height:1.5em}
-  .topbar .count{margin-left:auto;font-weight:bold;color:var(--ink-soft);font-size:.9rem;white-space:nowrap}
-  .progress-track{position:fixed;top:var(--topbar);left:0;right:0;height:6px;background:#e3ecf7;z-index:40}
-  .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--pause),var(--reset),var(--choose));
-    border-radius:0 6px 6px 0;transition:width .4s ease}
+    display:flex;align-items:center;gap:12px;padding:0 20px;
+    background:#fff;border-bottom:1px solid var(--line)}
+  .topbar .logo{font-family:var(--font-head);font-weight:700;display:flex;align-items:center;gap:10px;font-size:1.05rem}
+  .topbar .logo .badge{width:32px;height:32px;border-radius:10px;background:var(--reset);color:#fff;
+    display:flex;align-items:center;justify-content:center}
+  .topbar .logo .badge .ic{width:20px;height:20px}
+  .topbar .count{font-family:var(--font-head);margin-left:auto;font-weight:700;color:var(--ink-soft);font-size:.95rem;
+    white-space:nowrap;font-variant-numeric:tabular-nums}
+  .progress-track{position:fixed;top:var(--topbar);left:0;right:0;height:5px;background:#dde4ef;z-index:40}
+  .progress-fill{height:100%;width:0;background:var(--purple);border-radius:0 5px 5px 0;transition:width .4s ease}
 
-  .deck{position:fixed;inset:0;top:calc(var(--topbar) + 6px)}
+  .deck{position:fixed;inset:0;top:calc(var(--topbar) + 5px)}
   .slide{position:absolute;inset:0;overflow-y:auto;
-    padding:34px 22px calc(var(--botbar) + 24px);
+    padding:38px 22px calc(var(--botbar) + 26px);
     opacity:0;visibility:hidden;transform:translateY(14px);
     transition:opacity .4s ease, transform .4s ease, visibility .4s}
   .slide.active{opacity:1;visibility:visible;transform:none}
-  .slide-inner{max-width:920px;margin:0 auto;min-height:100%;
+  .slide-inner{max-width:880px;margin:0 auto;min-height:100%;
     display:flex;flex-direction:column;justify-content:center;text-align:center}
   .slide-inner>.eyebrow,.slide-inner>.hero-btns{align-self:center}
 
   .botbar{position:fixed;left:0;right:0;bottom:0;height:var(--botbar);z-index:40;
-    display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px;
-    background:rgba(255,255,255,.9);backdrop-filter:blur(8px);box-shadow:0 -2px 14px rgba(36,59,83,.1)}
-  .dots{display:flex;gap:8px;align-items:center}
-  .dot{width:11px;height:11px;border-radius:50%;border:none;background:#cdd9e8;cursor:pointer;padding:0;transition:.2s}
-  .dot:hover{transform:scale(1.25)}
-  .dot.on{background:var(--purple);transform:scale(1.3)}
+    display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;
+    background:#fff;border-top:1px solid var(--line)}
+  .dots{display:flex;gap:9px;align-items:center}
+  .dot{width:11px;height:11px;border-radius:50%;border:none;background:#c8d2e2;cursor:pointer;padding:0;transition:.2s}
+  .dot:hover{transform:scale(1.25);background:#aab8cf}
+  .dot.on{background:var(--purple);transform:scale(1.35)}
   .dot:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
 
-  .panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px}
-  .lead{font-size:clamp(1.05rem,2.6vw,1.4rem);color:var(--ink-soft);max-width:620px;margin:0 auto 22px}
-  .slide-title{font-size:clamp(1.8rem,5vw,3rem)}
-  .grad{background:linear-gradient(90deg,var(--pause),var(--reset),var(--choose));
-    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .panel{background:var(--surface);border-radius:var(--r-card);box-shadow:var(--sh);padding:32px;border:1px solid var(--line)}
+  .lead{font-size:clamp(1.05rem,2.4vw,1.32rem);color:var(--ink-soft);max-width:600px;margin:0 auto 22px;line-height:1.6}
+  .slide-title{font-size:clamp(1.9rem,5vw,3.1rem);letter-spacing:-.01em}
+  .accent{color:var(--purple)}
 
-  .mascot{width:160px;height:160px;margin:0 auto 6px;display:block}
+  .mascot-wrap{width:168px;height:168px;margin:0 auto 14px;border-radius:50%;background:#e3f5ee;
+    display:flex;align-items:center;justify-content:center}
+  .mascot{width:130px;height:130px;display:block}
   .float{animation:float 4s ease-in-out infinite}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-  .sway{transform-origin:50% 90%;animation:sway 4s ease-in-out infinite}
-  @keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
-  .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px}
 
   /* mood faces */
-  .mood-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:14px 0}
-  .mood-btn{padding:6px;background:#fff;border:3px solid transparent;border-radius:20px;
-    width:80px;height:80px;cursor:pointer;transition:.15s;box-shadow:var(--shadow-sm);
+  .mood-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+  .mood-btn{padding:8px;background:#fff;border:2px solid var(--line);border-radius:18px;
+    width:82px;height:82px;cursor:pointer;transition:.15s;box-shadow:var(--sh-sm);
     display:flex;align-items:center;justify-content:center}
-  .mood-btn:hover{transform:scale(1.1)}
+  .mood-btn:hover{transform:translateY(-3px);border-color:#d3dbe9}
   .mood-btn:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
-  .mood-btn[aria-pressed="true"]{border-color:var(--purple);background:#f0eaff}
+  .mood-btn[aria-pressed="true"]{border-color:var(--purple);background:#f1edff}
   .mood-btn .face{width:56px;height:56px;display:block}
   .mood-btn[aria-pressed="true"] .face{animation:moodBounce .5s ease}
   @keyframes moodBounce{0%,100%{transform:translateY(0)}40%{transform:translateY(-9px)}}
-  .mood-reply{min-height:1.6em;font-weight:bold;color:var(--ink);font-size:1.1rem}
+  .mood-reply{min-height:1.6em;font-weight:700;color:var(--ink);font-size:1.12rem}
 
   /* bottle */
-  .bottle-layout{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center;text-align:left}
+  .bottle-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;text-align:left}
+  .field-label{font-family:var(--font-head);font-weight:700;margin-bottom:10px}
   .worry-buttons{display:flex;flex-wrap:wrap;gap:10px}
-  .worry-buttons .btn.small{background:#eef4ff;color:var(--ink);box-shadow:var(--shadow-sm)}
-  .worry-buttons .btn.small:hover{background:#e0ecff}
-  .worry-buttons .btn.small.added{background:var(--pink);color:#fff}
+  .worry-buttons .btn.small{background:var(--surface-2);color:var(--ink);box-shadow:none;border:2px solid var(--line);font-family:var(--font-body);font-weight:700}
+  .worry-buttons .btn.small:hover{border-color:#d3dbe9;transform:translateY(-2px)}
+  .worry-buttons .btn.small.added{background:#fbd0e0;border-color:#f4aac6;color:var(--ink)}
   .bottle-stage{display:flex;flex-direction:column;align-items:center}
-  .bottle-svg{width:180px;max-width:55vw}
+  .bottle-svg{width:172px;max-width:52vw}
   #fillRect{transition:y .5s ease, height .5s ease, fill .5s ease}
   .foam{opacity:0}
   .erupting .foam{opacity:1;animation:erupt 1.1s ease-out forwards}
   @keyframes erupt{0%{transform:translateY(20px) scale(.6);opacity:0}40%{opacity:1}100%{transform:translateY(-40px) scale(1.25);opacity:.95}}
   .erupting .bottle-svg{animation:shake .4s ease-in-out 3}
   @keyframes shake{0%,100%{transform:translate(0)}25%{transform:translate(-4px,1px)}75%{transform:translate(4px,-1px)}}
-  .bottle-msg{margin-top:14px;font-weight:bold;min-height:2.6em;font-size:1.05rem}
+  .bottle-msg{margin-top:14px;font-weight:700;min-height:2.6em;font-size:1.05rem;color:var(--ink-soft)}
 
-  /* reset */
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:6px 0 0}
-  .step{border-radius:22px;padding:20px;color:#fff;box-shadow:var(--shadow-sm);text-align:left}
-  .step .num{font-size:1.7rem;font-weight:bold}
-  .step.pause{background:var(--pause)} .step.reset{background:var(--reset)} .step.choose{background:var(--choose)}
-  .step h3{font-size:1.25rem;margin:.2em 0;display:flex;align-items:center;gap:.4em}
-  .step h3 .ic{width:1.2em;height:1.2em}
-  .step p{font-size:.95rem;margin:0;opacity:.95}
-  .breeze line{stroke-dasharray:14;animation:breeze 1.8s linear infinite}
-  .breeze line:nth-child(2){animation-delay:.3s}
-  .breeze line:nth-child(3){animation-delay:.6s}
-  @keyframes breeze{0%{stroke-dashoffset:14}100%{stroke-dashoffset:-14}}
+  /* reset step cards */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:6px 0 0;text-align:left}
+  .step{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--sh-sm)}
+  .step .badge{width:52px;height:52px;border-radius:15px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:14px}
+  .step .badge .ic{width:28px;height:28px}
+  .step .step-num{font-family:var(--font-head);font-size:1.5rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+  .step h3{font-size:1.3rem;margin:.15em 0 .35em}
+  .step p{font-size:.98rem;margin:0;color:var(--ink-soft);line-height:1.55}
 
+  /* reset timer */
   .reset-stage{display:flex;flex-direction:column;align-items:center;text-align:center}
-  .ring-wrap{position:relative;width:240px;height:240px;max-width:74vw;max-height:74vw}
+  .ring-wrap{position:relative;width:236px;height:236px;max-width:72vw;max-height:72vw}
   .ring-wrap svg.ring{transform:rotate(-90deg);width:100%;height:100%}
   #ringFg{transition:stroke-dashoffset .25s linear, stroke .4s}
   .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-  .breath{width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.25);
-    display:flex;align-items:center;justify-content:center;font-weight:bold;color:#fff;position:absolute;font-size:1rem}
+  .breath{width:118px;height:118px;border-radius:50%;background:rgba(255,255,255,.28);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;position:absolute;font-size:1rem;font-family:var(--font-head)}
   .breathing .breath{animation:breathe 8s ease-in-out infinite}
   @keyframes breathe{0%,100%{transform:scale(.7)}50%{transform:scale(1.18)}}
-  .phase-name{font-size:1.5rem;font-weight:bold;color:var(--ink)}
-  .phase-count{font-size:2.6rem;font-weight:bold;line-height:1;color:var(--ink-soft)}
-  .reset-prompt{font-size:1.2rem;font-weight:bold;min-height:2.4em;max-width:480px;margin:16px auto 6px}
+  .phase-name{font-family:var(--font-head);font-size:1.55rem;font-weight:700;color:var(--ink)}
+  .phase-count{font-family:var(--font-head);font-size:2.7rem;font-weight:700;line-height:1;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .reset-prompt{font-size:1.18rem;font-weight:700;min-height:2.4em;max-width:460px;margin:18px auto 6px;color:var(--ink)}
   .reset-controls{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:6px}
-  .toggle{display:inline-flex;align-items:center;gap:8px;font-weight:bold;color:var(--ink-soft);cursor:pointer;margin-top:14px}
+  .toggle{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--ink-soft);cursor:pointer;margin-top:16px}
   .toggle input{width:20px;height:20px;accent-color:var(--purple)}
   .toggle .ic{width:1.2em;height:1.2em;color:var(--choose)}
-  .finish .big{font-size:2rem;margin:.2em 0}
+  .finish .big{font-family:var(--font-head);font-size:2rem;margin:.2em 0}
 
-  /* confetti burst */
-  .confetti{position:relative;width:150px;height:110px;margin:0 auto 6px}
+  /* confetti burst (solid colors) */
+  .confetti{position:relative;width:150px;height:106px;margin:0 auto 6px}
   .confetti i{position:absolute;left:50%;top:60%;width:13px;height:13px;border-radius:3px;
     transform:translate(-50%,-50%) scale(.3);opacity:0;animation:burst 1.7s ease-out infinite}
   @keyframes burst{
@@ -169,49 +183,56 @@
     100%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(1) rotate(var(--r));opacity:0}}
 
   /* scenarios */
-  .scn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .scn-card{background:var(--card);border-radius:22px;box-shadow:var(--shadow-sm);padding:22px;
-    cursor:pointer;border:3px solid transparent;transition:.15s;text-align:left;font:inherit;width:100%}
-  .scn-card:hover{transform:translateY(-4px);border-color:var(--purple)}
+  .scn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .scn-card{background:var(--surface);border-radius:20px;box-shadow:var(--sh-sm);padding:22px;
+    cursor:pointer;border:1px solid var(--line);transition:.16s;text-align:left;font:inherit;width:100%}
+  .scn-card:hover{transform:translateY(-4px);box-shadow:var(--sh);border-color:#d3dbe9}
   .scn-card:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
+  .scn-illus{width:54px;height:54px;border-radius:15px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .scn-illus .ic{width:30px;height:30px}
+  .scn-card h3{font-size:1.16rem;margin:0 0 .3em}
+  .scn-card .scn-blurb{margin:0;color:var(--ink-soft);font-size:.96rem;line-height:1.5}
   .scn-card.has-hint{position:relative}
-  .tap-hint{position:absolute;right:8px;bottom:6px;width:50px;height:62px;pointer-events:none;z-index:6}
+  .tap-hint{position:absolute;right:10px;bottom:8px;width:48px;height:60px;pointer-events:none;z-index:6}
   .tap-hint svg{width:100%;height:100%;transform-origin:55% 15%;
-    animation:tapMove 1.7s ease-in-out infinite;filter:drop-shadow(0 3px 4px rgba(36,59,83,.25))}
+    animation:tapMove 1.7s ease-in-out infinite;filter:drop-shadow(0 3px 4px rgba(31,43,61,.25))}
   @keyframes tapMove{0%,100%{transform:translateY(0) rotate(-6deg)}
     42%{transform:translateY(9px) rotate(-6deg)}62%{transform:translateY(9px) rotate(-6deg)}80%{transform:translateY(0) rotate(-6deg)}}
   .tap-hint .ripple{position:absolute;left:50%;top:10px;width:12px;height:12px;border-radius:50%;
-    border:3px solid var(--purple);transform:translate(-50%,-50%) scale(.3);opacity:0;
-    animation:tapRipple 1.7s ease-out infinite}
+    border:3px solid var(--purple);transform:translate(-50%,-50%) scale(.3);opacity:0;animation:tapRipple 1.7s ease-out infinite}
   @keyframes tapRipple{0%,42%{opacity:0;transform:translate(-50%,-50%) scale(.3)}
     50%{opacity:.75}82%,100%{opacity:0;transform:translate(-50%,-50%) scale(2.6)}}
-  .scn-illus{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center}
-  .scn-illus .ic{width:34px;height:34px}
-  .scn-card h3{font-size:1.1rem;margin:.5em 0 0}
-  .scn-modal{position:fixed;inset:0;background:rgba(36,59,83,.55);display:none;align-items:center;justify-content:center;z-index:100;padding:18px}
+
+  .scn-modal{position:fixed;inset:0;background:rgba(31,43,61,.55);display:none;align-items:center;justify-content:center;z-index:100;padding:18px}
   .scn-modal.open{display:flex}
-  .scn-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);max-width:560px;width:100%;
+  .scn-box{background:#fff;border-radius:var(--r-card);box-shadow:var(--sh-lg);max-width:560px;width:100%;
     padding:30px;position:relative;max-height:90vh;overflow:auto;text-align:left}
-  .scn-box .close{position:absolute;top:14px;right:14px;border:none;background:#f3f8ff;width:42px;height:42px;
-    border-radius:50%;font-size:1.3rem;cursor:pointer;font-weight:bold;color:var(--ink)}
-  .scn-step-badge{display:inline-flex;align-items:center;gap:.4em;font-weight:bold;padding:6px 14px;border-radius:999px;color:#fff;margin-bottom:10px}
+  .scn-box .close{position:absolute;top:14px;right:14px;border:none;background:var(--surface-2);width:42px;height:42px;
+    border-radius:50%;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center}
+  .scn-box .close .ic{width:18px;height:18px}
+  .scn-step-badge{display:inline-flex;align-items:center;gap:.4em;font-family:var(--font-head);font-weight:700;padding:7px 15px;border-radius:999px;color:#fff;margin-bottom:10px}
   .scn-step-badge .ic{width:1.2em;height:1.2em}
-  .scn-choices{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-  .scn-choices .btn{font-size:1rem;text-align:left;justify-content:flex-start;background:#eef4ff;color:var(--ink);box-shadow:var(--shadow-sm)}
-  .scn-choices .btn:hover{background:#e0ecff}
-  .scn-feedback{margin-top:14px;font-weight:bold;min-height:1.4em;color:var(--reset)}
-  .scn-progress{font-size:.85rem;color:var(--ink-soft);font-weight:bold;margin-bottom:6px}
+  .scn-box h3{font-size:1.35rem}
+  .scn-choices{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .scn-choices .btn{font-size:1rem;text-align:left;justify-content:flex-start;background:var(--surface-2);color:var(--ink);box-shadow:none;border:2px solid var(--line);font-family:var(--font-body);font-weight:700}
+  .scn-choices .btn:hover{border-color:#d3dbe9}
+  .scn-feedback{margin-top:16px;font-weight:700;min-height:1.4em;color:var(--reset)}
+  .scn-progress{font-family:var(--font-head);font-size:.85rem;color:var(--ink-soft);font-weight:700;margin-bottom:6px}
 
   /* help */
-  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
-  .fact{background:#fff;border-radius:20px;padding:18px;box-shadow:var(--shadow-sm);text-align:center}
-  .fact .ic{width:2.2em;height:2.2em;margin-bottom:6px}
-  .help-call{background:#fff;border-radius:20px;padding:20px;box-shadow:var(--shadow-sm);margin-top:18px;
-    display:flex;gap:14px;align-items:center;font-weight:bold;font-size:1.1rem;text-align:left}
-  .help-call .ic{width:2.2em;height:2.2em;flex:none;color:var(--pause)}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+  .fact{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--sh-sm);text-align:center}
+  .fact .fbadge{width:54px;height:54px;border-radius:15px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;color:#fff}
+  .fact .fbadge .ic{width:30px;height:30px}
+  .fact strong{font-family:var(--font-head);font-size:1.08rem}
+  .fact p{margin:.4em 0 0;color:var(--ink-soft);font-size:.95rem;line-height:1.5}
+  .help-call{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--sh-sm);margin-top:18px;
+    display:flex;gap:16px;align-items:center;font-weight:700;font-size:1.08rem;text-align:left}
+  .help-call .hbadge{width:54px;height:54px;border-radius:15px;background:var(--pause);color:#fff;flex:none;display:flex;align-items:center;justify-content:center}
+  .help-call .hbadge .ic{width:30px;height:30px}
 
-  .credits{margin-top:18px;color:var(--ink-soft);font-weight:bold}
-  .credits .strength{color:var(--choose);margin-top:6px}
+  .credits{margin-top:20px;color:var(--ink-soft);font-weight:700}
+  .credits .strength{color:var(--choose);margin-top:8px}
 
   .hidden{display:none!important}
   .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -222,7 +243,8 @@
     .scn-grid{grid-template-columns:1fr}
     .facts{grid-template-columns:1fr}
     .topbar .logo span.full{display:none}
-    .botbar .btn{padding:14px 20px;font-size:1.02rem}
+    .botbar .btn{padding:13px 18px;font-size:1rem}
+    .panel{padding:22px}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
@@ -243,7 +265,7 @@
   <symbol id="ic-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="2" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="2" fill="currentColor"/></symbol>
   <symbol id="ic-restart" viewBox="0 0 24 24"><path d="M19 12a7 7 0 1 1-2.05-4.95" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M19 4v4h-4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="ic-check" viewBox="0 0 24 24"><path d="M5 13l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="ic-wind" viewBox="0 0 24 24" class="breeze"><line x1="3" y1="8" x2="15" y2="8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><line x1="3" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><line x1="3" y1="16" x2="12" y2="16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="ic-wind" viewBox="0 0 24 24"><line x1="3" y1="8" x2="15" y2="8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><line x1="3" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><line x1="3" y1="16" x2="12" y2="16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
   <symbol id="ic-book" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 2-2h11v16H7a2 2 0 0 0-2 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 19a2 2 0 0 0 2 2h11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M4 5h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 9.5l2 2 2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="ic-down" viewBox="0 0 24 24"><path d="M4 4v16h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M8 9l4 4 3-2 4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 11v4h-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -259,7 +281,7 @@
 
 <!-- ===== TOP BAR + PROGRESS ===== -->
 <div class="topbar">
-  <span class="logo"><svg class="ic" style="color:var(--reset)"><use href="#ic-leaf"/></svg><span class="full">The 60-Second Reset</span></span>
+  <span class="logo"><span class="badge"><svg class="ic"><use href="#ic-leaf"/></svg></span><span class="full">The 60-Second Reset</span></span>
   <span class="count" id="slideCount">1 / 8</span>
 </div>
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
@@ -270,43 +292,44 @@
   <!-- SLIDE 1: Welcome -->
   <section class="slide" id="s-welcome" aria-label="Welcome">
     <div class="slide-inner">
-      <svg class="mascot float" viewBox="0 0 120 120" role="img" aria-label="A friendly calm leaf character">
-        <circle cx="60" cy="62" r="46" fill="#34c79a"/>
-        <circle cx="60" cy="62" r="46" fill="none" stroke="#2bb189" stroke-width="3"/>
-        <path d="M60 20 C40 40 40 70 60 92 C80 70 80 40 60 20Z" fill="#bff3df"/>
-        <circle cx="48" cy="60" r="6" fill="#243b53"/><circle cx="72" cy="60" r="6" fill="#243b53"/>
-        <circle cx="50" cy="58" r="2" fill="#fff"/><circle cx="74" cy="58" r="2" fill="#fff"/>
-        <path d="M48 74 Q60 84 72 74" fill="none" stroke="#243b53" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="40" cy="70" r="5" fill="#ff9fbf" opacity=".7"/><circle cx="80" cy="70" r="5" fill="#ff9fbf" opacity=".7"/>
-      </svg>
-      <h1 class="slide-title">The <span class="grad">60-Second Reset</span></h1>
-      <p class="lead">Welcome! This is a quick mini-course that teaches you a tiny tool to feel calmer in under a minute — anywhere, anytime.</p>
+      <div class="mascot-wrap">
+        <svg class="mascot float" viewBox="0 0 120 120" role="img" aria-label="A friendly calm leaf character">
+          <circle cx="60" cy="62" r="46" fill="#0e9b75"/>
+          <path d="M60 20 C40 40 40 70 60 92 C80 70 80 40 60 20Z" fill="#bff3df"/>
+          <circle cx="48" cy="60" r="6" fill="#1f2b3d"/><circle cx="72" cy="60" r="6" fill="#1f2b3d"/>
+          <circle cx="50" cy="58" r="2" fill="#fff"/><circle cx="74" cy="58" r="2" fill="#fff"/>
+          <path d="M48 74 Q60 84 72 74" fill="none" stroke="#1f2b3d" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="40" cy="70" r="5" fill="#ff9fbf" opacity=".7"/><circle cx="80" cy="70" r="5" fill="#ff9fbf" opacity=".7"/>
+        </svg>
+      </div>
+      <h1 class="slide-title">The <span class="accent">60-Second Reset</span></h1>
+      <p class="lead">Welcome! This is a quick mini-course that teaches you a tiny tool to feel calmer in under a minute, anywhere, anytime.</p>
       <p class="lead" style="font-size:1rem">Tap <strong>Next</strong> (or use your arrow keys) to go through it one step at a time.</p>
-      <div class="hero-btns"><button class="btn green" data-deck="next">Let's begin →</button></div>
+      <div class="hero-btns"><button class="btn green" data-deck="next">Let's begin</button></div>
     </div>
   </section>
 
   <!-- SLIDE 2: Mood check-in -->
   <section class="slide" id="s-mood" aria-label="How do you feel">
     <div class="slide-inner">
-      <span class="eyebrow" style="color:var(--purple)">Check In</span>
+      <span class="eyebrow" style="color:var(--purple)"><span class="dot"></span>Check In</span>
       <h2 class="slide-title">How do you feel today?</h2>
-      <p class="lead">Tap the face that fits best. There's no wrong answer — noticing how you feel is the first step.</p>
+      <p class="lead">Tap the face that fits best. There's no wrong answer. Noticing how you feel is the first step.</p>
       <div class="mood-row" id="moodRow">
         <button class="mood-btn" aria-pressed="false" aria-label="Happy" data-msg="Awesome! Let's keep that good energy going.">
-          <svg class="face" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#ffd166"/><circle cx="16" cy="20" r="3.4" fill="#ff9fbf" opacity=".6"/><circle cx="32" cy="20" r="3.4" fill="#ff9fbf" opacity=".6"/><circle cx="17" cy="20" r="2.6" fill="#243b53"/><circle cx="31" cy="20" r="2.6" fill="#243b53"/><path d="M15 27 Q24 38 33 27 Z" fill="#fff" stroke="#243b53" stroke-width="2.2" stroke-linejoin="round"/></svg>
+          <svg class="face" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#ffc44d"/><circle cx="16" cy="20" r="3.4" fill="#ff9fbf" opacity=".6"/><circle cx="32" cy="20" r="3.4" fill="#ff9fbf" opacity=".6"/><circle cx="17" cy="20" r="2.6" fill="#1f2b3d"/><circle cx="31" cy="20" r="2.6" fill="#1f2b3d"/><path d="M15 27 Q24 38 33 27 Z" fill="#fff" stroke="#1f2b3d" stroke-width="2.2" stroke-linejoin="round"/></svg>
         </button>
-        <button class="mood-btn" aria-pressed="false" aria-label="Good" data-msg="Nice — feeling okay is a great place to be.">
-          <svg class="face" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#ffd166"/><circle cx="17" cy="21" r="2.6" fill="#243b53"/><circle cx="31" cy="21" r="2.6" fill="#243b53"/><path d="M16 29 Q24 34 32 29" fill="none" stroke="#243b53" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <button class="mood-btn" aria-pressed="false" aria-label="Good" data-msg="Nice! Feeling okay is a great place to be.">
+          <svg class="face" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#ffc44d"/><circle cx="17" cy="21" r="2.6" fill="#1f2b3d"/><circle cx="31" cy="21" r="2.6" fill="#1f2b3d"/><path d="M16 29 Q24 34 32 29" fill="none" stroke="#1f2b3d" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <button class="mood-btn" aria-pressed="false" aria-label="So-so" data-msg="Feeling so-so is totally normal. This tool can help.">
-          <svg class="face" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#ffd166"/><circle cx="17" cy="21" r="2.6" fill="#243b53"/><circle cx="31" cy="21" r="2.6" fill="#243b53"/><path d="M17 30 H31" fill="none" stroke="#243b53" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <svg class="face" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#ffc44d"/><circle cx="17" cy="21" r="2.6" fill="#1f2b3d"/><circle cx="31" cy="21" r="2.6" fill="#1f2b3d"/><path d="M17 30 H31" fill="none" stroke="#1f2b3d" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <button class="mood-btn" aria-pressed="false" aria-label="Worried" data-msg="Thanks for being honest. Let's learn the Reset together.">
-          <svg class="face" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#ffd166"/><path d="M13 17 L20 19" fill="none" stroke="#243b53" stroke-width="2" stroke-linecap="round"/><path d="M35 17 L28 19" fill="none" stroke="#243b53" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="23" r="2.6" fill="#243b53"/><circle cx="31" cy="23" r="2.6" fill="#243b53"/><path d="M16 32 Q24 27 32 32" fill="none" stroke="#243b53" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <svg class="face" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#ffc44d"/><path d="M13 17 L20 19" fill="none" stroke="#1f2b3d" stroke-width="2" stroke-linecap="round"/><path d="M35 17 L28 19" fill="none" stroke="#1f2b3d" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="23" r="2.6" fill="#1f2b3d"/><circle cx="31" cy="23" r="2.6" fill="#1f2b3d"/><path d="M16 32 Q24 27 32 32" fill="none" stroke="#1f2b3d" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
-        <button class="mood-btn" aria-pressed="false" aria-label="Sad" data-msg="It's brave to share that. You're not alone — talking to a trusted adult helps.">
-          <svg class="face" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#ffd166"/><circle cx="17" cy="22" r="2.6" fill="#243b53"/><circle cx="31" cy="22" r="2.6" fill="#243b53"/><path d="M31 25 q3 4 1 8 q-3 -1 -1 -8z" fill="#5b8def"/><path d="M16 33 Q24 27 32 33" fill="none" stroke="#243b53" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <button class="mood-btn" aria-pressed="false" aria-label="Sad" data-msg="It's brave to share that. You're not alone. Talking to a trusted adult helps.">
+          <svg class="face" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#ffc44d"/><circle cx="17" cy="22" r="2.6" fill="#1f2b3d"/><circle cx="31" cy="22" r="2.6" fill="#1f2b3d"/><path d="M31 25 q3 4 1 8 q-3 -1 -1 -8z" fill="#3b6fe0"/><path d="M16 33 Q24 27 32 33" fill="none" stroke="#1f2b3d" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
       </div>
       <p class="mood-reply" id="moodReply" aria-live="polite"></p>
@@ -316,13 +339,13 @@
   <!-- SLIDE 3: What is stress? (bottle) -->
   <section class="slide" id="s-stress" aria-label="What is stress">
     <div class="slide-inner">
-      <span class="eyebrow" style="color:var(--pink)">The Bottle Experiment</span>
+      <span class="eyebrow" style="color:var(--pink)"><span class="dot"></span>The Bottle Experiment</span>
       <h2 class="slide-title">What happens when we bottle up stress?</h2>
       <p class="lead">Stress is the worried, tense feeling we get from hard things. When we keep it all inside, it builds up. Tap the worries and watch!</p>
       <div class="panel">
         <div class="bottle-layout">
           <div>
-            <p style="font-weight:bold">Add some worries to the bottle:</p>
+            <p class="field-label">Add some worries to the bottle:</p>
             <div class="worry-buttons" id="worryButtons">
               <button class="btn small"><svg class="ic"><use href="#ic-book"/></svg>Big test tomorrow</button>
               <button class="btn small"><svg class="ic"><use href="#ic-chat"/></svg>Friend trouble</button>
@@ -330,24 +353,24 @@
               <button class="btn small"><svg class="ic"><use href="#ic-clock"/></svg>Running late</button>
               <button class="btn small"><svg class="ic"><use href="#ic-moon"/></svg>Didn't sleep well</button>
             </div>
-            <p class="bottle-msg" id="bottleMsg" aria-live="polite">Tap a worry to add it in…</p>
-            <button class="btn green hidden" id="useResetBtn">Learn the Reset →</button>
+            <p class="bottle-msg" id="bottleMsg" aria-live="polite">Tap a worry to add it in.</p>
+            <button class="btn green hidden" id="useResetBtn">Learn the Reset</button>
           </div>
           <div class="bottle-stage" id="bottleStage">
             <svg class="bottle-svg" viewBox="0 0 120 200" role="img" aria-label="A bottle filling up with stress">
               <g class="foam">
-                <circle cx="60" cy="30" r="10" fill="#ffd166"/><circle cx="46" cy="38" r="8" fill="#ff9f43"/>
-                <circle cx="74" cy="38" r="8" fill="#ff6b9d"/><circle cx="60" cy="46" r="7" fill="#9b6bff"/>
-                <circle cx="52" cy="26" r="6" fill="#5b8def"/><circle cx="70" cy="24" r="6" fill="#34c79a"/>
+                <circle cx="60" cy="30" r="10" fill="#ffc44d"/><circle cx="46" cy="38" r="8" fill="#e8740e"/>
+                <circle cx="74" cy="38" r="8" fill="#ec5a8d"/><circle cx="60" cy="46" r="7" fill="#6c4bf0"/>
+                <circle cx="52" cy="26" r="6" fill="#3b6fe0"/><circle cx="70" cy="24" r="6" fill="#0e9b75"/>
               </g>
               <rect x="50" y="40" width="20" height="22" rx="4" fill="#cfe0f5"/>
-              <path d="M40 62 Q40 56 50 56 L70 56 Q80 56 80 62 L84 180 Q84 192 72 192 L48 192 Q36 192 36 180 Z" fill="#e8f0fb" stroke="#cfe0f5" stroke-width="2"/>
+              <path d="M40 62 Q40 56 50 56 L70 56 Q80 56 80 62 L84 180 Q84 192 72 192 L48 192 Q36 192 36 180 Z" fill="#eef3fb" stroke="#cfe0f5" stroke-width="2"/>
               <clipPath id="bottleClip"><path d="M40 62 Q40 56 50 56 L70 56 Q80 56 80 62 L84 180 Q84 192 72 192 L48 192 Q36 192 36 180 Z"/></clipPath>
-              <g clip-path="url(#bottleClip)"><rect id="fillRect" x="34" y="190" width="52" height="2" fill="#5b8def"/></g>
-              <rect x="44" y="120" width="32" height="40" rx="6" fill="#fff" opacity=".8"/>
+              <g clip-path="url(#bottleClip)"><rect id="fillRect" x="34" y="190" width="52" height="2" fill="#3b6fe0"/></g>
+              <rect x="44" y="120" width="32" height="40" rx="6" fill="#fff" opacity=".85"/>
               <g transform="translate(60,140)">
-                <circle cx="-6" cy="-3" r="2.2" fill="#243b53"/><circle cx="6" cy="-3" r="2.2" fill="#243b53"/>
-                <path d="M-7 6 Q0 1 7 6" fill="none" stroke="#243b53" stroke-width="2.2" stroke-linecap="round"/>
+                <circle cx="-6" cy="-3" r="2.2" fill="#1f2b3d"/><circle cx="6" cy="-3" r="2.2" fill="#1f2b3d"/>
+                <path d="M-7 6 Q0 1 7 6" fill="none" stroke="#1f2b3d" stroke-width="2.2" stroke-linecap="round"/>
               </g>
             </svg>
           </div>
@@ -359,29 +382,29 @@
   <!-- SLIDE 4: Meet the Reset -->
   <section class="slide" id="s-meet" aria-label="Meet the Reset">
     <div class="slide-inner">
-      <span class="eyebrow" style="color:var(--purple)">The Main Tool</span>
+      <span class="eyebrow" style="color:var(--purple)"><span class="dot"></span>The Main Tool</span>
       <h2 class="slide-title">Meet the 60-Second Reset</h2>
       <p class="lead">When stress hits, do these three easy steps. Together they take about one minute.</p>
       <div class="steps">
-        <div class="step pause"><div class="num">10s</div><h3><svg class="ic"><use href="#ic-pause"/></svg>Pause</h3><p>Stop and notice what you're feeling. Don't react right away.</p></div>
-        <div class="step reset"><div class="num">20s</div><h3><svg class="ic"><use href="#ic-wind"/></svg>Reset</h3><p>Take slow breaths and tell yourself something kind to calm your body.</p></div>
-        <div class="step choose"><div class="num">30s</div><h3><svg class="ic"><use href="#ic-check"/></svg>Choose</h3><p>Now pick a calm, smart choice instead of acting in a rush.</p></div>
+        <div class="step"><span class="badge" style="background:var(--pause)"><svg class="ic"><use href="#ic-pause"/></svg></span><div class="step-num" style="color:var(--pause)">10 sec</div><h3>Pause</h3><p>Stop and notice what you're feeling. Don't react right away.</p></div>
+        <div class="step"><span class="badge" style="background:var(--reset)"><svg class="ic"><use href="#ic-wind"/></svg></span><div class="step-num" style="color:var(--reset)">20 sec</div><h3>Reset</h3><p>Take slow breaths and tell yourself something kind to calm your body.</p></div>
+        <div class="step"><span class="badge" style="background:var(--choose)"><svg class="ic"><use href="#ic-check"/></svg></span><div class="step-num" style="color:var(--choose)">30 sec</div><h3>Choose</h3><p>Now pick a calm, smart choice instead of acting in a rush.</p></div>
       </div>
-      <p class="lead" style="margin-top:22px;font-size:1rem">Ready to try it for real? Tap <strong>Next</strong>.</p>
+      <p class="lead" style="margin-top:24px;font-size:1rem">Ready to try it for real? Tap <strong>Next</strong>.</p>
     </div>
   </section>
 
   <!-- SLIDE 5: Try the Reset (timer) -->
   <section class="slide" id="s-try" aria-label="Try the Reset">
     <div class="slide-inner">
-      <span class="eyebrow" style="color:var(--reset)">Your Turn</span>
+      <span class="eyebrow" style="color:var(--reset)"><span class="dot"></span>Your Turn</span>
       <h2 class="slide-title">Let's do a Reset together</h2>
       <div class="panel">
         <div class="reset-stage" id="resetStage">
           <div class="ring-wrap" id="ringWrap">
             <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
               <circle cx="100" cy="100" r="88" fill="none" stroke="#eef2f7" stroke-width="16"/>
-              <circle id="ringFg" cx="100" cy="100" r="88" fill="none" stroke="#9b6bff" stroke-width="16"
+              <circle id="ringFg" cx="100" cy="100" r="88" fill="none" stroke="#6c4bf0" stroke-width="16"
                       stroke-linecap="round" stroke-dasharray="552.9" stroke-dashoffset="552.9"/>
             </svg>
             <div class="ring-center">
@@ -401,8 +424,8 @@
         <div class="finish hidden" id="finishScreen">
           <div class="confetti" id="confettiA" aria-hidden="true"></div>
           <h3 class="big">You did it!</h3>
-          <p style="color:var(--ink-soft);max-width:480px;margin:0 auto 18px">That was your 60-Second Reset. You paused, calmed your body, and made room for a smart choice. You can use this <strong>anytime</strong>.</p>
-          <button class="btn purple" id="againBtn" style="background:var(--purple)"><svg class="ic"><use href="#ic-restart"/></svg>Do it again</button>
+          <p style="color:var(--ink-soft);max-width:460px;margin:0 auto 18px">That was your 60-Second Reset. You paused, calmed your body, and made room for a smart choice. You can use this <strong>anytime</strong>.</p>
+          <button class="btn" id="againBtn"><svg class="ic"><use href="#ic-restart"/></svg>Do it again</button>
         </div>
       </div>
     </div>
@@ -411,9 +434,9 @@
   <!-- SLIDE 6: Practice -->
   <section class="slide" id="s-practice" aria-label="Practice">
     <div class="slide-inner">
-      <span class="eyebrow" style="color:var(--choose)">Practice Time</span>
+      <span class="eyebrow" style="color:var(--choose)"><span class="dot"></span>Practice Time</span>
       <h2 class="slide-title">Try the Reset on real situations</h2>
-      <p class="lead">Pick a situation and walk through Pause → Reset → Choose. No wrong answers — it's all practice!</p>
+      <p class="lead">Pick a situation and walk through Pause, Reset, Choose. No wrong answers, it's all practice!</p>
       <div class="scn-grid" id="scnGrid"></div>
     </div>
   </section>
@@ -421,15 +444,15 @@
   <!-- SLIDE 7: Ask for help -->
   <section class="slide" id="s-help" aria-label="Asking for help">
     <div class="slide-inner">
-      <span class="eyebrow" style="color:var(--pause)">Most Important</span>
+      <span class="eyebrow" style="color:var(--pause)"><span class="dot"></span>Most Important</span>
       <h2 class="slide-title">It's okay to ask for help</h2>
-      <p class="lead">Sometimes stress feels too big for a Reset — and that's okay. Feelings are invisible, so people can't always tell you're struggling. Talking really helps.</p>
+      <p class="lead">Sometimes stress feels too big for a Reset, and that's okay. Feelings are invisible, so people can't always tell you're struggling. Talking really helps.</p>
       <div class="facts">
-        <div class="fact"><svg class="ic" style="color:var(--pause)"><use href="#ic-speak"/></svg><strong>Talking helps</strong><p style="margin:.4em 0 0;color:var(--ink-soft)">Sharing a worry makes it feel smaller.</p></div>
-        <div class="fact"><svg class="ic" style="color:var(--reset)"><use href="#ic-sprout"/></svg><strong>Care for feelings early</strong><p style="margin:.4em 0 0;color:var(--ink-soft)">Healthy habits now help you grow up strong.</p></div>
-        <div class="fact"><svg class="ic" style="color:var(--pink)"><use href="#ic-heart"/></svg><strong>Asking is brave</strong><p style="margin:.4em 0 0;color:var(--ink-soft)">Reaching out is a strength, not a weakness.</p></div>
+        <div class="fact"><span class="fbadge" style="background:var(--pause)"><svg class="ic"><use href="#ic-speak"/></svg></span><strong>Talking helps</strong><p>Sharing a worry makes it feel smaller.</p></div>
+        <div class="fact"><span class="fbadge" style="background:var(--reset)"><svg class="ic"><use href="#ic-sprout"/></svg></span><strong>Care for feelings early</strong><p>Healthy habits now help you grow up strong.</p></div>
+        <div class="fact"><span class="fbadge" style="background:var(--pink)"><svg class="ic"><use href="#ic-heart"/></svg></span><strong>Asking is brave</strong><p>Reaching out is a strength, not a weakness.</p></div>
       </div>
-      <div class="help-call"><svg class="ic"><use href="#ic-people"/></svg><span>If something feels too heavy, tell a <strong>trusted adult</strong> — a parent, teacher, or school counselor. You don't have to handle it alone.</span></div>
+      <div class="help-call"><span class="hbadge"><svg class="ic"><use href="#ic-people"/></svg></span><span>If something feels too heavy, tell a <strong>trusted adult</strong>: a parent, teacher, or school counselor. You don't have to handle it alone.</span></div>
     </div>
   </section>
 
@@ -438,13 +461,13 @@
     <div class="slide-inner">
       <div class="confetti" id="confettiB" aria-hidden="true"></div>
       <h2 class="slide-title">You finished the course!</h2>
-      <p class="lead">You learned how stress builds up, and how the <strong>60-Second Reset</strong> — Pause, Reset, Choose — helps you handle it. Use it whenever you need it.</p>
+      <p class="lead">You learned how stress builds up, and how the <strong>60-Second Reset</strong> (Pause, Reset, Choose) helps you handle it. Use it whenever you need it.</p>
       <div class="hero-btns">
         <button class="btn green" data-deck="go" data-target="s-try"><svg class="ic"><use href="#ic-restart"/></svg>Practice the Reset again</button>
         <button class="btn ghost" data-deck="go" data-target="s-welcome">Start over</button>
       </div>
       <div class="credits">
-        <div>Made by <strong>Bridging the Gap</strong> — Sofia · Samantha · Caden · Seonho</div>
+        <div>Made by <strong>Bridging the Gap</strong>. Sofia, Samantha, Caden, and Seonho.</div>
         <div class="strength">Remember: asking for help is a strength, not a weakness.</div>
       </div>
     </div>
@@ -454,9 +477,9 @@
 
 <!-- ===== BOTTOM NAV ===== -->
 <nav class="botbar" aria-label="Course navigation">
-  <button class="btn ghost" id="backBtn">← Back</button>
+  <button class="btn ghost" id="backBtn">Back</button>
   <div class="dots" id="dots" role="tablist" aria-label="Slides"></div>
-  <button class="btn green" id="nextBtn">Next →</button>
+  <button class="btn green" id="nextBtn">Next</button>
 </nav>
 
 <!-- scenario modal -->
@@ -469,7 +492,7 @@
     <p id="scnText" style="color:var(--ink-soft)"></p>
     <div class="scn-choices" id="scnChoices"></div>
     <p class="scn-feedback" id="scnFeedback" aria-live="polite"></p>
-    <button class="btn green small hidden" id="scnNext" style="margin-top:14px">Next step →</button>
+    <button class="btn green small hidden" id="scnNext" style="margin-top:16px">Next step</button>
   </div>
 </div>
 
@@ -479,7 +502,7 @@ function icon(id){ return '<svg class="ic" aria-hidden="true"><use href="#'+id+'
 
 /* build confetti pieces */
 (function(){
-  const colors=['#ff6b9d','#34c79a','#5b8def','#ff9f43','#ffd166','#9b6bff'];
+  const colors=['#ec5a8d','#0e9b75','#3b6fe0','#e8740e','#ffc44d','#6c4bf0'];
   const spots=[[-60,-44,200],[-30,-58,-140],[6,-62,120],[40,-52,-200],[64,-30,160],
                [-66,-8,-120],[70,4,140],[-48,18,-160],[30,22,180],[0,-30,90]];
   function fill(el){
@@ -552,7 +575,7 @@ const Deck = (function(){
     count.textContent=(idx+1)+' / '+N;
     dots.forEach((d,j)=>{ d.classList.toggle('on',j===idx); d.setAttribute('aria-selected',j===idx); });
     backBtn.disabled = idx===0;
-    nextBtn.textContent = idx===N-1 ? 'Start over' : 'Next →';
+    nextBtn.textContent = idx===N-1 ? 'Start over' : 'Next';
     const h=slides[idx].querySelector('h1,h2');
     if(h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); }
   }
@@ -600,7 +623,7 @@ const Deck = (function(){
   const msg=document.getElementById('bottleMsg');
   const useBtn=document.getElementById('useResetBtn');
   const buttons=document.querySelectorAll('#worryButtons .btn');
-  const colors=['#5b8def','#34c79a','#ffd166','#ff9f43','#ff6b9d','#9b6bff'];
+  const colors=['#3b6fe0','#0e9b75','#ffc44d','#e8740e','#ec5a8d','#6c4bf0'];
   const top=56, bottom=190, maxLevel=5;
   let level=0, erupted=false;
 
@@ -624,14 +647,14 @@ const Deck = (function(){
     Sound.beep(360,0.1);
     level++; render();
     if(level>=maxLevel){ erupt(); }
-    else { msg.textContent="Feeling fuller… that worry is building up inside. (Keep going to see what happens.)"; }
+    else { msg.textContent="Feeling fuller. That worry is building up inside. (Keep going to see what happens.)"; }
   }));
   useBtn.addEventListener('click',()=>{
     stage.classList.remove('erupting');
     buttons.forEach(b=>b.classList.remove('added'));
     level=0; erupted=false; render();
     useBtn.classList.add('hidden');
-    msg.textContent="Tap a worry to add it in…";
+    msg.textContent="Tap a worry to add it in.";
     Deck.next();
   });
   render();
@@ -640,11 +663,11 @@ const Deck = (function(){
 /* ================= THE 60-SECOND RESET TIMER ================= */
 (function(){
   const PHASES=[
-    {name:'Pause', key:'pause', secs:10, color:'#5b8def',
-     prompts:["Stop everything for a moment.","Notice what you're feeling right now.","You don't have to react yet — just notice."]},
-    {name:'Reset', key:'reset', secs:20, color:'#34c79a',
-     prompts:["Breathe in slowly… and out…","Say to yourself: “I can handle this.”","“This feeling will pass.”","Let your shoulders drop. You're doing great."]},
-    {name:'Choose', key:'choose', secs:30, color:'#ff9f43',
+    {name:'Pause', key:'pause', secs:10, color:'#3b6fe0',
+     prompts:["Stop everything for a moment.","Notice what you're feeling right now.","You don't have to react yet, just notice."]},
+    {name:'Reset', key:'reset', secs:20, color:'#0e9b75',
+     prompts:["Breathe in slowly, and out.","Say to yourself: “I can handle this.”","“This feeling will pass.”","Let your shoulders drop. You're doing great."]},
+    {name:'Choose', key:'choose', secs:30, color:'#e8740e',
      prompts:["Now your calm brain is back in charge.","What's a smart, kind choice you could make?","Pick the choice that future-you will be glad about."]},
   ];
   const TOTAL=PHASES.reduce((s,p)=>s+p.secs,0);
@@ -699,7 +722,7 @@ const Deck = (function(){
   }
   function reset(){
     clearInterval(timerId); running=false; phaseIdx=0; phaseRemaining=0;
-    ringFg.style.strokeDashoffset=CIRC; ringFg.style.stroke='#9b6bff';
+    ringFg.style.strokeDashoffset=CIRC; ringFg.style.stroke='#6c4bf0';
     phaseName.textContent='Ready?'; phaseName.style.color='';
     phaseCount.textContent='60'; phaseCount.style.color='';
     prompt.innerHTML='Press <strong>Start</strong> and follow along. Find a comfy spot first.';
@@ -708,7 +731,7 @@ const Deck = (function(){
     finish.classList.add('hidden'); stage.classList.remove('hidden');
   }
   function complete(){
-    clearInterval(timerId); running=false; setRing(TOTAL,'#34c79a');
+    clearInterval(timerId); running=false; setRing(TOTAL,'#0e9b75');
     ringWrap.classList.remove('breathing'); breath.classList.add('hidden');
     Sound.beep(784,0.3); setTimeout(()=>Sound.beep(988,0.3),180);
     stage.classList.add('hidden'); finish.classList.remove('hidden');
@@ -722,42 +745,42 @@ const Deck = (function(){
 /* ================= PRACTICE SCENARIOS ================= */
 (function(){
   const scenarios=[
-    {illus:'ic-down', tint:'#fde3ea', tintColor:'#ff6b9d', title:'A tough grade',
+    {illus:'ic-down', tint:'#fde3ea', tintColor:'#ec5a8d', title:'A tough grade',
      text:"You studied really hard, but you got a bad grade on your test. You feel frustrated and want to give up.",
      steps:[
-       {icon:'ic-pause', label:'Pause', color:'#5b8def', q:"First step: Pause. What's the calm thing to do right now?",
+       {icon:'ic-pause', label:'Pause', color:'#3b6fe0', q:"First step: Pause. What's the calm thing to do right now?",
         choices:[{t:"Rip up the test and storm off",ok:false,fb:"That's a big reaction. Pausing first gives your calm brain a chance. Try again!"},
                  {t:"Stop and take a breath before reacting",ok:true,fb:"Yes! Pausing stops the rush feeling so you can think clearly."}]},
-       {icon:'ic-wind', label:'Reset', color:'#34c79a', q:"Now Reset. What's a kind thing to tell yourself?",
+       {icon:'ic-wind', label:'Reset', color:'#0e9b75', q:"Now Reset. What's a kind thing to tell yourself?",
         choices:[{t:"“I'm just bad at this.”",ok:false,fb:"Be gentle with yourself. One grade doesn't decide who you are. Try a kinder thought!"},
                  {t:"“One test doesn't define me. I can improve.”",ok:true,fb:"Beautiful. Kind self-talk calms your body and your mind."}]},
-       {icon:'ic-check', label:'Choose', color:'#ff9f43', q:"Finally, Choose. What's a smart next step?",
+       {icon:'ic-check', label:'Choose', color:'#e8740e', q:"Finally, Choose. What's a smart next step?",
         choices:[{t:"Ask the teacher what I can do better next time",ok:true,fb:"Great choice! That turns a tough moment into a chance to grow."},
                  {t:"Decide to never try again",ok:false,fb:"Your calm brain knows you can grow from this. Pick the choice future-you will thank you for!"}]},
      ]},
-    {illus:'ic-chat', tint:'#fde3ea', tintColor:'#ff6b9d', title:'Friend trouble',
+    {illus:'ic-chat', tint:'#fde3ea', tintColor:'#ec5a8d', title:'Friend trouble',
      text:"A friend said something at lunch that hurt your feelings. You feel angry and left out.",
      steps:[
-       {icon:'ic-pause', label:'Pause', color:'#5b8def', q:"Step one: Pause. What helps most right now?",
+       {icon:'ic-pause', label:'Pause', color:'#3b6fe0', q:"Step one: Pause. What helps most right now?",
         choices:[{t:"Yell back right away",ok:false,fb:"That can make things worse. Pausing first keeps you in control. Try again!"},
                  {t:"Take 10 seconds before saying anything",ok:true,fb:"Exactly. A short pause stops a hurt feeling from becoming a bigger fight."}]},
-       {icon:'ic-wind', label:'Reset', color:'#34c79a', q:"Now Reset your body. What helps you calm down?",
+       {icon:'ic-wind', label:'Reset', color:'#0e9b75', q:"Now Reset your body. What helps you calm down?",
         choices:[{t:"Slow breaths and remind myself I'm okay",ok:true,fb:"Perfect. Calm body, calmer thoughts."},
                  {t:"Hold my breath and stay tense",ok:false,fb:"Slow breathing tells your body it's safe. Try the calmer option!"}]},
-       {icon:'ic-check', label:'Choose', color:'#ff9f43', q:"Choose your next move:",
+       {icon:'ic-check', label:'Choose', color:'#e8740e', q:"Choose your next move:",
         choices:[{t:"Calmly tell my friend how it made me feel",ok:true,fb:"Wonderful. Honest, calm words fix more than anger ever could."},
                  {t:"Spread a rumor to get even",ok:false,fb:"Your calm brain wants a choice that helps, not hurts. Try again!"}]},
      ]},
-    {illus:'ic-clock', tint:'#e6efff', tintColor:'#5b8def', title:'Test nerves',
+    {illus:'ic-clock', tint:'#e6efff', tintColor:'#3b6fe0', title:'Test nerves',
      text:"There's a big test in five minutes. Your heart is pounding and your mind feels blank.",
      steps:[
-       {icon:'ic-pause', label:'Pause', color:'#5b8def', q:"Pause first. What's the move?",
+       {icon:'ic-pause', label:'Pause', color:'#3b6fe0', q:"Pause first. What's the move?",
         choices:[{t:"Notice the nervous feeling without panicking",ok:true,fb:"Yes! Naming the feeling takes away some of its power."},
-                 {t:"Tell myself I'm going to fail",ok:false,fb:"Pausing means noticing — not piling on scary thoughts. Try again!"}]},
-       {icon:'ic-wind', label:'Reset', color:'#34c79a', q:"Reset time. Pick the best calming tool:",
+                 {t:"Tell myself I'm going to fail",ok:false,fb:"Pausing means noticing, not piling on scary thoughts. Try again!"}]},
+       {icon:'ic-wind', label:'Reset', color:'#0e9b75', q:"Reset time. Pick the best calming tool:",
         choices:[{t:"Three slow breaths and “I'm ready for this.”",ok:true,fb:"Great! Breathing slows your heart and clears your mind."},
                  {t:"Drink lots of soda fast",ok:false,fb:"That speeds you up more! Slow breaths are the calming choice. Try again!"}]},
-       {icon:'ic-check', label:'Choose', color:'#ff9f43', q:"Now Choose how to start the test:",
+       {icon:'ic-check', label:'Choose', color:'#e8740e', q:"Now Choose how to start the test:",
         choices:[{t:"Read the first question and do my best",ok:true,fb:"That's it! One calm step at a time. You've got this."},
                  {t:"Give up before I even start",ok:false,fb:"Your calm brain knows you can try. Pick the brave choice!"}]},
      ]},
@@ -780,7 +803,7 @@ const Deck = (function(){
     card.className='scn-card';
     card.innerHTML='<span class="scn-illus" style="background:'+s.tint+';color:'+s.tintColor+'">'+icon(s.illus)+'</span>'+
       '<h3>'+s.title+'</h3>'+
-      '<p style="margin:.3em 0 0;color:var(--ink-soft);font-size:.92rem">'+s.text+'</p>';
+      '<p class="scn-blurb">'+s.text+'</p>';
     card.addEventListener('click',()=>openScenario(i));
     grid.appendChild(card);
   });
@@ -793,7 +816,7 @@ const Deck = (function(){
       '<span class="tap-hint" aria-hidden="true"><span class="ripple"></span>'+
       '<svg viewBox="0 0 48 60"><path d="M17 30 V12 a4 4 0 0 1 8 0 v12 a3.5 3.5 0 0 1 7 .5 v3 '+
       'a3.3 3.3 0 0 1 6 .6 l-.6 9 a11 11 0 0 1 -11 10 h-2 a11 11 0 0 1 -9 -4.7 l-6.2 -9 '+
-      'a3.6 3.6 0 0 1 5.5 -4.6 l2.8 2.8 Z" fill="#ffd9b3" stroke="#243b53" stroke-width="2.4" '+
+      'a3.6 3.6 0 0 1 5.5 -4.6 l2.8 2.8 Z" fill="#ffd9b3" stroke="#1f2b3d" stroke-width="2.4" '+
       'stroke-linejoin="round"/></svg></span>');
   }
   function removeHint(){ document.querySelectorAll('.tap-hint').forEach(h=>h.remove());
@@ -802,7 +825,7 @@ const Deck = (function(){
   function openScenario(i){ removeHint(); current=scenarios[i]; stepIdx=0; modal.classList.add('open'); renderStep(); }
   function renderStep(){
     const step=current.steps[stepIdx];
-    progress.textContent='Step '+(stepIdx+1)+' of '+current.steps.length+' — '+current.title;
+    progress.textContent='Step '+(stepIdx+1)+' of '+current.steps.length+': '+current.title;
     badge.innerHTML=icon(step.icon)+step.label; badge.style.background=step.color;
     titleEl.textContent=step.q;
     textEl.textContent=stepIdx===0?current.text:'';
@@ -816,7 +839,7 @@ const Deck = (function(){
         if(ch.ok){
           Sound.beep(660,0.15);
           [...choicesEl.children].forEach(c=>c.disabled=true);
-          nextBtn.textContent = stepIdx<current.steps.length-1 ? 'Next step →' : 'Finish';
+          nextBtn.textContent = stepIdx<current.steps.length-1 ? 'Next step' : 'Finish';
           nextBtn.classList.remove('hidden');
         }
       });
@@ -827,9 +850,9 @@ const Deck = (function(){
     if(stepIdx<current.steps.length-1){ stepIdx++; renderStep(); }
     else {
       badge.innerHTML=icon('ic-check')+'Great job!'; badge.style.background='var(--purple)';
-      progress.textContent=current.title+' — complete!';
+      progress.textContent=current.title+': complete!';
       titleEl.textContent="You walked through the whole Reset!";
-      textEl.textContent="Pause → Reset → Choose. You can use these same three steps with any tricky situation in real life.";
+      textEl.textContent="Pause, Reset, Choose. You can use these same three steps with any tricky situation in real life.";
       choicesEl.innerHTML=''; feedback.textContent=''; nextBtn.classList.add('hidden');
       Sound.beep(784,0.3);
     }
