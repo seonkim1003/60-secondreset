@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="'Trebuchet MS','Segoe UI',system-ui,sans-serif">
+  <rect width="1200" height="630" fill="#eef2fa"/>
+  <rect x="40" y="40" width="1120" height="550" rx="36" fill="#ffffff" stroke="#e4e9f2" stroke-width="2"/>
+
+  <!-- mascot -->
+  <circle cx="270" cy="315" r="150" fill="#e3f5ee"/>
+  <circle cx="270" cy="315" r="104" fill="#0e9b75"/>
+  <path d="M270 230 C233 268 233 330 270 372 C307 330 307 268 270 230Z" fill="#bff3df"/>
+  <circle cx="247" cy="312" r="11" fill="#1f2b3d"/><circle cx="293" cy="312" r="11" fill="#1f2b3d"/>
+  <circle cx="251" cy="308" r="4" fill="#fff"/><circle cx="297" cy="308" r="4" fill="#fff"/>
+  <path d="M247 338 Q270 358 293 338" fill="none" stroke="#1f2b3d" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="232" cy="335" r="9" fill="#ff9fbf" opacity=".7"/><circle cx="308" cy="335" r="9" fill="#ff9fbf" opacity=".7"/>
+
+  <!-- text -->
+  <text x="470" y="240" font-size="78" font-weight="700" fill="#1f2b3d">The <tspan fill="#6c4bf0">60-Second</tspan></text>
+  <text x="470" y="320" font-size="78" font-weight="700" fill="#6c4bf0">Reset</text>
+  <text x="472" y="375" font-size="32" font-weight="700" fill="#5a6779">A calm-down tool kids can use anywhere.</text>
+
+  <!-- step chips -->
+  <g font-size="30" font-weight="700" fill="#ffffff">
+    <rect x="472" y="420" width="186" height="64" rx="32" fill="#3b6fe0"/>
+    <text x="565" y="461" text-anchor="middle">Pause</text>
+    <rect x="672" y="420" width="186" height="64" rx="32" fill="#0e9b75"/>
+    <text x="765" y="461" text-anchor="middle">Reset</text>
+    <rect x="872" y="420" width="186" height="64" rx="32" fill="#e8740e"/>
+    <text x="965" y="461" text-anchor="middle">Choose</text>
+  </g>
+
+  <text x="472" y="535" font-size="26" font-weight="700" fill="#5a6779">60secondreset.org</text>
+</svg>
